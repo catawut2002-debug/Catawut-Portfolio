@@ -248,10 +248,19 @@
 
             <!-- Fake Profile Visual / Achievements -->
             <div class="w-full md:w-2/5 flex justify-center animate-fade-in-up opacity-0 delay-200 relative mt-8 md:mt-0">
-                <div class="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full border border-gray-800 bg-netcard flex flex-col items-center justify-center overflow-hidden group">
-                    <div class="absolute inset-0 bg-netred/10 group-hover:bg-netred/20 transition-colors"></div>
-                    <i class="fas fa-user-tie text-5xl md:text-7xl text-gray-600 mb-2 md:mb-4 group-hover:text-gray-400 transition-colors relative z-10"></i>
-                    <p class="text-[10px] md:text-xs text-gray-500 tracking-widest uppercase relative z-10">Profile Picture</p>
+                
+                <!-- Netflix Circular Profile Frame -->
+                <div class="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full border-4 border-netred bg-netcard flex flex-col items-center justify-center overflow-hidden group transition-all duration-500 shadow-[0_0_30px_rgba(229,9,20,0.5)] hover:shadow-[0_0_50px_rgba(229,9,20,0.8)] hover:scale-105 cursor-pointer">
+                    
+                    <!-- Cinematic Inner Glow -->
+                    <div class="absolute inset-0 rounded-full shadow-[inset_0_0_30px_rgba(0,0,0,0.8)] z-10 pointer-events-none"></div>
+                    
+                    <!-- Bottom fade overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent z-10 opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
+                    
+                    <!-- Image with object-position adjustment (object-[center_15%]) -->
+                    <!-- ปรับเปลี่ยนค่าตัวเลขตรง center_15% ได้เลยครับ เช่น center_10% หรือ center_20% เพื่อขยับรูปขึ้นลง -->
+                    <img src="S__7593986.jpg" alt="Catawut Phormrin" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Catawut+Phormrin&background=181818&color=E5E5E5&size=512'" class="w-full h-full object-cover object-[center_15%] relative z-0 transition-transform duration-700 ease-out group-hover:scale-110">
                 </div>
 
                 <!-- Floating Skill Logos -->
@@ -834,7 +843,7 @@
             modal.classList.add('hidden');
             modal.classList.remove('flex');
             // Re-enable background scroll
-            document.body.style.overflow = 'auto';
+            document.body.style.overflow = '';
         }
     </script>
 </body>
