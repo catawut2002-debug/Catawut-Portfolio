@@ -191,7 +191,7 @@
                 </div>
                 <h1 class="animate-fade-in-up opacity-0 delay-100 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading text-white leading-none mb-4 drop-shadow-lg">
                     <span class="en-text">DATA-DRIVEN<br/><span class="text-netred">STRATEGIST</span></span>
-                    <span class="th-text">นักกลยุทธ์-ขับเคลื่อนด้วย<br/><span class="text-netred">ข้อมูล</span></span>
+                    <span class="th-text">นักกลยุทธ์ที่ขับเคลื่อนด้วย<br/><span class="text-netred">ข้อมูล</span></span>
                 </h1>
                 <p class="animate-fade-in-up opacity-0 delay-200 text-base md:text-xl text-gray-400 mb-8 leading-relaxed max-w-2xl mx-auto md:mx-0">
                     <span class="en-text">
@@ -243,7 +243,7 @@
                 </div>
 
                 <div class="absolute top-4 -left-2 sm:top-10 sm:-left-4 md:top-16 md:-left-12 bg-netcard border border-gray-800 rounded p-2 md:p-3 shadow-2xl flex items-center gap-2 md:gap-3 scale-90 sm:scale-100 z-20">
-                    <div class="text-green-500 font-bold text-lg md:text-xl leading-none">200 UP</div>
+                    <div class="text-green-500 font-bold text-lg md:text-xl leading-none">200+</div>
                     <div class="text-[10px] md:text-xs text-gray-400 uppercase font-semibold leading-tight">
                         <span class="en-text">New<br/>Accounts</span>
                         <span class="th-text">ลูกค้า<br/>ใหม่</span>
@@ -279,7 +279,7 @@
                             <div>
                                 <h3 class="text-base md:text-lg font-bold text-white leading-tight">
                                     <span class="en-text">Management Trainee</span>
-                                    <span class="th-text">ผู้จัดการฝึกหัด</span>
+                                    <span class="th-text">ผู้บริหารฝึกหัด</span>
                                 </h3>
                                 <p class="text-netred font-medium text-xs md:text-sm mt-0.5">CPF <span class="text-gray-500 hidden sm:inline">| Jun 2025 - Dec 2025</span></p>
                                 <p class="text-gray-500 text-[10px] sm:hidden mt-0.5">Jun 2025 - Dec 2025</p>
@@ -823,6 +823,16 @@
                     <span class="text-green-500 font-bold text-xs md:text-sm">99% Match</span>
                     <span class="border border-gray-600 px-1 text-[10px] md:text-xs text-gray-400">PRO</span>
                 </div>
+
+                <div class="mb-5 md:mb-6">
+                    <div class="mb-3 inline-flex items-center gap-2 px-3 py-2 border border-netred/40 bg-netred/10 rounded-md shadow-[0_0_20px_rgba(229,9,20,0.12)]">
+                        <i class="fas fa-trophy text-netred text-sm md:text-base"></i>
+                        <span class="en-text text-netred font-bold tracking-widest uppercase text-xs md:text-sm">Achievement</span>
+                        <span class="th-text text-netred font-bold tracking-widest uppercase text-xs md:text-sm">Achievement</span>
+                    </div>
+                    <div id="modal-achievement" class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
+                </div>
+
                 <p class="text-white font-bold text-sm md:text-base mb-3">
                     <span class="en-text">How I use it:</span>
                     <span class="th-text">ลักษณะการนำไปใช้งาน:</span>
@@ -1062,6 +1072,16 @@
                 title: 'Advanced Excel',
                 keywordEn: 'Data Analysis',
                 keywordTh: 'วิเคราะห์ข้อมูล',
+                achievementEn: [
+                    { value: 'CLEAN', label: 'Structured Raw Data' },
+                    { value: 'SEGMENT', label: 'Customer Grouping' },
+                    { value: 'REPORT', label: 'Actionable Reporting' }
+                ],
+                achievementTh: [
+                    { value: 'CLEAN', label: 'จัดระเบียบข้อมูลดิบ' },
+                    { value: 'SEGMENT', label: 'แบ่งกลุ่มลูกค้า' },
+                    { value: 'REPORT', label: 'รายงานที่ใช้ได้จริง' }
+                ],
                 iconClass: 'fas fa-file-excel text-[#217346]',
                 en: [
                     "Used Advanced Excel to clean, structure, and analyze sales and customer data for business planning, pricing review, and performance tracking.",
@@ -1078,6 +1098,16 @@
                 title: 'AI Tools',
                 keywordEn: 'Productivity',
                 keywordTh: 'เพิ่มประสิทธิภาพ',
+                achievementEn: [
+                    { value: 'FASTER', label: 'Analysis Speed' },
+                    { value: 'INSIGHT', label: 'Customer Insight' },
+                    { value: 'TARGET', label: 'Prospect Screening' }
+                ],
+                achievementTh: [
+                    { value: 'FASTER', label: 'เร่งความเร็วการวิเคราะห์' },
+                    { value: 'INSIGHT', label: 'อินไซต์ลูกค้า' },
+                    { value: 'TARGET', label: 'คัดกรองกลุ่มเป้าหมาย' }
+                ],
                 iconClass: 'fas fa-robot text-purple-500',
                 en: [
                     "Applied AI tools to speed up analysis, summarize information, and improve productivity in day-to-day business tasks.",
@@ -1094,6 +1124,16 @@
                 title: 'Basic Python',
                 keywordEn: 'Automation',
                 keywordTh: 'ระบบอัตโนมัติ',
+                achievementEn: [
+                    { value: 'SCRIPT', label: 'Basic Coding Skill' },
+                    { value: 'LOGIC', label: 'Problem Solving' },
+                    { value: 'AUTO', label: 'Mini Automation' }
+                ],
+                achievementTh: [
+                    { value: 'SCRIPT', label: 'ทักษะเขียนโค้ดพื้นฐาน' },
+                    { value: 'LOGIC', label: 'แก้ปัญหาเชิงตรรกะ' },
+                    { value: 'AUTO', label: 'งานอัตโนมัติขนาดเล็ก' }
+                ],
                 iconClass: 'fab fa-python text-[#FFD43B]',
                 en: [
                     "Built a basic foundation in Python through university learning and personal practice in data-related tasks.",
@@ -1110,6 +1150,16 @@
                 title: 'SQL',
                 keywordEn: 'Data Query',
                 keywordTh: 'ดึงข้อมูล',
+                achievementEn: [
+                    { value: 'QUERY', label: 'Large Data Retrieval' },
+                    { value: 'FILTER', label: 'Useful Data Extraction' },
+                    { value: 'TABLE', label: 'Structured Output' }
+                ],
+                achievementTh: [
+                    { value: 'QUERY', label: 'ดึงข้อมูลขนาดใหญ่' },
+                    { value: 'FILTER', label: 'คัดข้อมูลที่ใช้ได้จริง' },
+                    { value: 'TABLE', label: 'ผลลัพธ์เป็นระบบ' }
+                ],
                 iconClass: 'fas fa-database text-[#008BB9]',
                 en: [
                     "Used SQL to retrieve, filter, and organize large customer datasets for sales planning and business analysis.",
@@ -1126,6 +1176,16 @@
                 title: 'Power BI',
                 keywordEn: 'Visualization',
                 keywordTh: 'แสดงผลข้อมูล',
+                achievementEn: [
+                    { value: 'DASH', label: 'Dashboard Building' },
+                    { value: 'TREND', label: 'Trend Monitoring' },
+                    { value: 'DECIDE', label: 'Decision Support' }
+                ],
+                achievementTh: [
+                    { value: 'DASH', label: 'สร้างแดชบอร์ด' },
+                    { value: 'TREND', label: 'ติดตามแนวโน้ม' },
+                    { value: 'DECIDE', label: 'สนับสนุนการตัดสินใจ' }
+                ],
                 iconClass: 'fas fa-chart-bar text-[#F2C811]',
                 en: [
                     "Built dashboards to visualize sales performance, business trends, and operational results in a format that was easy to monitor.",
@@ -1142,6 +1202,16 @@
                 title: 'Google Apps Script',
                 keywordEn: 'Workflow',
                 keywordTh: 'เวิร์กโฟลว์',
+                achievementEn: [
+                    { value: 'WEB', label: 'Dashboard Flow' },
+                    { value: 'MOBILE', label: 'Easy Access' },
+                    { value: 'TRACK', label: 'Daily Follow-up' }
+                ],
+                achievementTh: [
+                    { value: 'WEB', label: 'แดชบอร์ดบนเว็บ' },
+                    { value: 'MOBILE', label: 'เข้าถึงได้ง่าย' },
+                    { value: 'TRACK', label: 'ติดตามงานประจำวัน' }
+                ],
                 iconClass: 'fas fa-file-code text-[#4285F4]',
                 en: [
                     "Used Google Apps Script to create a simple web-based dashboard that connected field staff and management through shared data.",
@@ -1161,16 +1231,27 @@
         const modalTitle = document.getElementById('modal-title');
         const modalKeyword = document.getElementById('modal-keyword');
         const modalDesc = document.getElementById('modal-desc');
+        const modalAchievement = document.getElementById('modal-achievement');
 
         function openSkillModal(skillKey) {
             const data = skillsData[skillKey];
             modalIcon.className = `${data.iconClass} text-5xl sm:text-7xl relative z-10 drop-shadow-2xl`;
             modalTitle.innerText = data.title;
-            modalKeyword.innerHTML = `
-                <i class="fas fa-tag text-gray-300 text-sm md:text-base"></i>
-                <span class="en-text text-gray-300 font-bold tracking-widest uppercase text-xs md:text-sm">${data.keywordEn}</span>
-                <span class="th-text text-gray-300 font-bold tracking-widest uppercase text-xs md:text-sm">${data.keywordTh}</span>
-            `;
+            modalKeyword.innerHTML = `$1`;
+
+            const achievementItems = data.achievementEn.map((item, index) => {
+                const thItem = data.achievementTh[index];
+                return `
+                    <div class="bg-black/40 border border-gray-800 rounded-md p-3 md:p-4">
+                        <div class="en-text text-netred font-heading text-xl md:text-2xl leading-none">${item.value}</div>
+                        <div class="th-text text-netred font-heading text-xl md:text-2xl leading-none">${thItem.value}</div>
+                        <div class="en-text text-[11px] md:text-xs text-gray-400 uppercase mt-1">${item.label}</div>
+                        <div class="th-text text-[11px] md:text-xs text-gray-400 mt-1">${thItem.label}</div>
+                    </div>
+                `;
+            }).join('');
+
+            modalAchievement.innerHTML = achievementItems;
 
             const listItems = data.en.map((enText, index) => {
                 const thText = data.th[index];
