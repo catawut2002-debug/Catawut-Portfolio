@@ -20,16 +20,15 @@
             theme: {
                 extend: {
                     colors: {
-                        netbg: '#141414',       // Netflix Background
-                        netcard: '#181818',     // Netflix Card Background
-                        netcardhover: '#2f2f2f',// Netflix Card Hover
-                        netred: '#E50914',      // Netflix Primary Red
-                        netredhover: '#F40612', // Netflix Red Hover
-                        netgray: '#808080',     // Netflix Subtext
-                        nettext: '#E5E5E5'      // Netflix Main Text
+                        netbg: '#141414',
+                        netcard: '#181818',
+                        netcardhover: '#2f2f2f',
+                        netred: '#E50914',
+                        netredhover: '#F40612',
+                        netgray: '#808080',
+                        nettext: '#E5E5E5'
                     },
                     fontFamily: {
-                        // Set Freesia as the primary font for text, with Inter and Prompt as fallbacks
                         sans: ['Freesia', 'Inter', 'Prompt', 'sans-serif'],
                         heading: ['Bebas Neue', 'sans-serif'],
                     },
@@ -61,32 +60,22 @@
             background-color: #141414;
             color: #E5E5E5;
             overflow-x: hidden;
-            /* Add padding for mobile bottom nav */
             padding-bottom: 0;
         }
         @media (max-width: 767px) {
-            body { padding-bottom: 70px; } /* Space for bottom nav */
+            body { padding-bottom: 70px; }
         }
-
-        /* Netflix Style Scrollbar */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #141414; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #E50914; }
-
-        /* Text Selection */
         ::selection { background: #E50914; color: white; }
-
         .glass-nav {
             background: linear-gradient(to bottom, rgba(20,20,20,0.95) 0%, rgba(20,20,20,0.7) 100%);
             backdrop-filter: blur(10px);
         }
-
-        /* Language Toggle Logic */
         body.lang-en .th-text { display: none; }
         body.lang-th .en-text { display: none; }
-
-        /* Smooth Accordion */
         .accordion-content {
             display: grid;
             grid-template-rows: 0fr;
@@ -94,8 +83,6 @@
         }
         .accordion-content.open { grid-template-rows: 1fr; }
         .accordion-inner { overflow: hidden; }
-
-        /* Skill Card Hover Effect */
         .skill-card {
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
         }
@@ -104,8 +91,6 @@
             box-shadow: 0 10px 30px -10px rgba(229, 9, 20, 0.3);
             border-color: #E50914;
         }
-
-        /* Mobile Bottom Sheet Animation */
         @media (max-width: 639px) {
             .animate-modal-pop {
                 animation: slideUp 0.3s ease-out forwards !important;
@@ -115,8 +100,6 @@
                 100% { transform: translateY(0); opacity: 1; }
             }
         }
-
-        /* Bottom Nav Active State */
         .bottom-nav-link.active {
             color: white;
         }
@@ -124,8 +107,6 @@
             transform: scale(1.1);
             color: #E50914;
         }
-
-        /* Utility for delaying animations */
         .delay-100 { animation-delay: 100ms; }
         .delay-200 { animation-delay: 200ms; }
         .delay-300 { animation-delay: 300ms; }
@@ -138,12 +119,9 @@
     <nav class="fixed top-0 w-full z-50 transition-all duration-300 py-4 glass-nav" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-12">
-                <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
                     <span class="font-heading text-4xl md:text-5xl tracking-wider text-netred drop-shadow-md">CATAWUT</span>
                 </div>
-                
-                <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="#about" class="text-gray-300 hover:text-white font-medium transition-colors text-sm">
                         <span class="en-text">About</span><span class="th-text">เกี่ยวกับ</span>
@@ -157,15 +135,12 @@
                     <a href="#contact" class="text-gray-300 hover:text-white font-medium transition-colors text-sm mr-4">
                         <span class="en-text">Contact</span><span class="th-text">ติดต่อ</span>
                     </a>
-                    <!-- Language Toggle (Desktop) -->
                     <button id="lang-toggle" class="border border-gray-600 rounded px-3 py-1 text-xs text-white hover:border-white transition-colors flex items-center gap-2">
                         <i class="fas fa-globe"></i>
                         <span class="en-text font-bold">EN / TH</span>
                         <span class="th-text font-bold">TH / EN</span>
                     </button>
                 </div>
-
-                <!-- Mobile Controls (Language Only) -->
                 <div class="md:hidden flex items-center gap-4">
                     <button id="lang-toggle-mobile" class="border border-gray-600 rounded px-2 py-1 text-xs text-white flex items-center gap-1 bg-netbg/50">
                         <i class="fas fa-globe text-gray-400"></i> 
@@ -201,37 +176,30 @@
         </a>
     </nav>
 
-    <!-- Hero Section (Netflix Billboard Style) -->
+    <!-- Hero Section (kept unchanged) -->
     <section id="about" class="relative pt-28 pb-16 md:pt-48 md:pb-32 min-h-[90vh] md:min-h-screen flex items-center scroll-mt-20">
-        <!-- Background Vignette & Gradient -->
         <div class="absolute inset-0 z-0 pointer-events-none">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(229,9,20,0.15)_0%,rgba(20,20,20,1)_70%)]"></div>
-            <!-- Vignette -->
             <div class="absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.9)] md:shadow-[inset_0_0_150px_rgba(0,0,0,0.9)]"></div>
         </div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            
             <div class="w-full md:w-3/5 text-center md:text-left mt-4 md:mt-0">
                 <div class="animate-fade-in-up opacity-0 inline-block px-3 py-1 bg-netcard border border-gray-800 rounded-sm text-gray-300 font-bold text-[10px] md:text-xs tracking-widest uppercase mb-4 md:mb-6">
-                    <span class="en-text">Management Trainee | Engineer | Business Analyst</span>
-                    <span class="th-text">ผู้บริหารฝึกหัด | วิศวกร | นักวิเคราะห์ธุรกิจ</span>
+                    <span class="en-text">AI | INNOVATION | TECHNOLOGY | INVESTMENT | BUSINESS</span>
+                    <span class="th-text">ปัญญาประดิษฐ์ | นวัตกรรม | เทคโนโลยี | การลงทุน | ธุรกิจ</span>
                 </div>
-                
                 <h1 class="animate-fade-in-up opacity-0 delay-100 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading text-white leading-none mb-4 drop-shadow-lg">
                     <span class="en-text">DATA-DRIVEN<br/><span class="text-netred">STRATEGIST</span></span>
                     <span class="th-text">นักกลยุทธ์ที่ขับเคลื่อนด้วย<br/><span class="text-netred">ข้อมูล</span></span>
                 </h1>
-                
                 <p class="animate-fade-in-up opacity-0 delay-200 text-base md:text-xl text-gray-400 mb-8 leading-relaxed max-w-2xl mx-auto md:mx-0">
                     <span class="en-text">
-                        Hi, I'm <strong class="text-white">Catawut Phormrin</strong>. A highly motivated professional blending Engineering acumen with Business Strategy. Proven track record in B2B acquisition, pricing optimization, and operational excellence.
+                        Hi, I'm <strong class="text-white">Catawut Phormrin</strong>. I’m Catawut Phormrin, a professional who operates at the BRIDGING of engineering and business strategy. I’ve demonstrated my ability to deliver results by securing B2B clients and developing complex pricing structures that drive revenue. Having succeeded in global innovation challenges, I am now passionate about integrating AI and Technology into business models to create sustainable competitive advantages.
                     </span>
                     <span class="th-text">
-                        สวัสดีครับ ผม <strong class="text-white">คฑาวุธ พรมรินทร์</strong> ผู้เชี่ยวชาญที่นำทักษะเชิงวิเคราะห์แบบวิศวกรมาผสานกับกลยุทธ์ทางธุรกิจ มีผลงานโดดเด่นในการขยายฐานลูกค้า B2B การปรับโครงสร้างราคา และเพิ่มประสิทธิภาพการดำเนินงาน
-                    </span>
+                        สวัสดีครับ ผม <strong class="text-white">คฑาวุธ พรมรินทร์</strong> ผมคฑาวุธ พรมรินทร์ มืออาชีพที่ทำงานบนคาบเกี่ยวระหว่างวิศวกรรมและกลยุทธ์ทางธุรกิจ ผมพิสูจน์ความสามารถผ่านผลงานที่จับต้องได้ ทั้งการปิดดีลลูกค้า B2B และการพัฒนาโครงสร้างราคาที่ซับซ้อนเพื่อเพิ่มรายได้ หลังจากประสบความสำเร็จบนเวทีนวัตกรรมระดับโลก ตอนนี้ผมหลงใหลในการนำ AI และเทคโนโลยี เข้ามาผสานกับโมเดลธุรกิจเพื่อสร้างความได้เปรียบทางการแข่งขันที่ยั่งยืนครับ
                 </p>
-                
                 <div class="animate-fade-in-up opacity-0 delay-300 flex flex-col sm:flex-row flex-wrap justify-center md:justify-start gap-3 md:gap-4">
                     <a href="#journey" class="w-full sm:w-auto px-8 py-3 bg-white text-black rounded font-bold hover:bg-gray-200 transition-colors flex items-center justify-center gap-2">
                         <i class="fas fa-play text-xs"></i>
@@ -246,7 +214,7 @@
                 </div>
             </div>
 
-            <!-- Fake Profile Visual / Achievements -->
+             <!-- Fake Profile Visual / Achievements -->
             <div class="w-full md:w-2/5 flex justify-center animate-fade-in-up opacity-0 delay-200 relative mt-8 md:mt-0">
                 
                 <!-- Netflix Circular Profile Frame -->
@@ -272,9 +240,8 @@
                 </div>
                 <div class="absolute top-[35%] -right-6 sm:top-[40%] sm:-right-8 md:top-[40%] md:-right-8 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-netcard border border-gray-800 rounded-full flex items-center justify-center shadow-xl z-30 animate-float" style="animation-delay: -4s;">
                     <i class="fas fa-database text-[#008BB9] text-xl md:text-2xl" title="SQL"></i>
-                </div>
+                </div>>
 
-                <!-- Netflix Style Match Badges (Scaled for Mobile) -->
                 <div class="absolute top-4 -left-2 sm:top-10 sm:-left-4 md:top-16 md:-left-12 bg-netcard border border-gray-800 rounded p-2 md:p-3 shadow-2xl flex items-center gap-2 md:gap-3 scale-90 sm:scale-100 z-20">
                     <div class="text-green-500 font-bold text-lg md:text-xl leading-none">200+</div>
                     <div class="text-[10px] md:text-xs text-gray-400 uppercase font-semibold leading-tight">
@@ -284,7 +251,7 @@
                 </div>
 
                 <div class="absolute bottom-4 -right-2 sm:bottom-10 sm:-right-4 md:bottom-16 md:-right-8 bg-netcard border border-gray-800 rounded p-2 md:p-3 shadow-2xl flex items-center gap-2 md:gap-3 scale-90 sm:scale-100 z-20">
-                    <div class="text-green-500 font-bold text-lg md:text-xl leading-none">+36%</div>
+                    <div class="text-green-500 font-bold text-lg md:text-xl leading-none">36% UP</div>
                     <div class="text-[10px] md:text-xs text-gray-400 uppercase font-semibold leading-tight">
                         <span class="en-text">Net<br/>Profit</span>
                         <span class="th-text">กำไร<br/>สุทธิ</span>
@@ -303,7 +270,7 @@
             </h2>
 
             <div class="space-y-3 md:space-y-4">
-                
+
                 <!-- 1. CPF -->
                 <div class="bg-netcard rounded-md border border-gray-800 overflow-hidden">
                     <button class="w-full text-left px-4 py-4 md:px-6 md:py-5 flex items-center justify-between focus:outline-none hover:bg-netcardhover transition-colors" onclick="toggleAccordion('cpf', this)">
@@ -322,40 +289,94 @@
                     </button>
                     <div id="cpf" class="accordion-content open">
                         <div class="accordion-inner bg-[#111] border-t border-gray-800">
-                            <div class="p-4 md:p-6 md:pl-20 space-y-5 md:space-y-6">
+                            <div class="p-4 md:p-6 md:pl-20 space-y-6 md:space-y-8">
                                 <div>
+                                    <div class="mb-3 inline-block px-3 py-1 border border-netred/40 bg-netred/10 rounded-sm">
+                                        <span class="en-text text-netred font-bold tracking-widest uppercase text-xs md:text-sm">Bridging the Gap</span>
+                                        <span class="th-text text-netred font-bold tracking-widest uppercase text-xs md:text-sm">Bridging the Gap</span>
+                                    </div>
                                     <h4 class="text-white font-bold mb-2 text-sm md:text-base">
-                                        <span class="en-text">1. CPF x Makro (Chai Nat) - Fresh Product</span>
-                                        <span class="th-text">1. CPF x Makro (ชัยนาท) - สินค้าอาหารสด</span>
+                                        <span class="en-text">Project: CPF x Makro Chainat (Fresh Product Synergy)</span>
+                                        <span class="th-text">โครงการ: CPF x Makro Chainat (Fresh Product Synergy)</span>
                                     </h4>
-                                    <ul class="space-y-2 text-xs md:text-sm text-gray-400">
-                                        <li class="flex items-start gap-2"><i class="fas fa-play text-netred text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
-                                            <span class="en-text"><strong>B2B Acquisition:</strong> Executed strategies resulting in 200 new accounts.</span>
-                                            <span class="th-text"><strong>หาลูกค้า B2B:</strong> ดำเนินกลยุทธ์จนสามารถขยายฐานลูกค้าใหม่ได้กว่า 200 บัญชี</span>
+
+                                    <ul class="space-y-4 text-xs md:text-sm text-gray-400">
+                                        <li>
+                                            <div class="flex items-start gap-2"><i class="fas fa-play text-netred text-[8px] md:text-[10px] mt-1 shrink-0"></i>
+                                                <div>
+                                                    <p class="en-text"><strong>B2B Acquisition & Growth:</strong> Developed and executed a strategic B2B customer acquisition plan, generating <strong>200 new business accounts</strong>.</p>
+                                                    <p class="th-text"><strong>การหาลูกค้าและการเติบโตแบบ B2B:</strong> พัฒนาและลงมือดำเนินแผนการหาลูกค้า B2B เชิงกลยุทธ์ จนสร้าง <strong>ลูกค้าธุรกิจใหม่ 200 บัญชี</strong></p>
+                                                </div>
+                                            </div>
+                                            <div class="ml-5 md:ml-6 mt-2 space-y-2 text-gray-500">
+                                                <p class="en-text">• Re-activated inactive accounts and won new customers by shifting the sales approach from product-based selling to <strong>solution-based selling</strong>, with a focus on customer value and long-term profitability.</p>
+                                                <p class="th-text">• ดึงลูกค้าที่หยุดซื้อกลับมาและปิดการขายลูกค้าใหม่ได้ โดยเปลี่ยนแนวทางการขายจากการขายตามตัวสินค้า ไปสู่ <strong>solution-based selling</strong> ที่เน้นคุณค่าต่อลูกค้าและกำไรระยะยาว</p>
+                                                <p class="en-text">• Applied AI to enhance data analysis, combining it with field research to gather customer insights. Developed criteria to directly address customer pain points, streamlining workflows and increasing efficiency. Collected and analyzed data using Excel to provide personalized care and meet specific customer needs.</p>
+                                                <p class="th-text">• ใช้ AI เพื่อเสริมการวิเคราะห์ข้อมูล โดยผสานกับการลงพื้นที่เก็บ customer insights พัฒนาเกณฑ์ที่ตอบ pain point ของลูกค้าโดยตรง ช่วยให้ workflow กระชับขึ้นและมีประสิทธิภาพมากขึ้น พร้อมทั้งเก็บและวิเคราะห์ข้อมูลด้วย Excel เพื่อดูแลลูกค้าแบบเฉพาะรายและตอบโจทย์ความต้องการที่แตกต่างกัน</p>
+                                            </div>
                                         </li>
-                                        <li class="flex items-start gap-2"><i class="fas fa-play text-netred text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
-                                            <span class="en-text"><strong>Pricing:</strong> Conducted commercial analysis for pricing & promotions.</span>
-                                            <span class="th-text"><strong>กลยุทธ์ราคา:</strong> วิเคราะห์ข้อมูลเชิงพาณิชย์เพื่อสนับสนุนการตัดสินใจเรื่องราคาและโปรโมชั่น</span>
+
+                                        <li>
+                                            <div class="flex items-start gap-2"><i class="fas fa-play text-netred text-[8px] md:text-[10px] mt-1 shrink-0"></i>
+                                                <div>
+                                                    <p class="en-text"><strong>Commercial Analysis & Pricing Strategy:</strong> Designed in-store promotions and improved pricing structures, contributing to a <strong>36% increase in net profit within 3 months</strong> <span class="text-gray-500">(around 200,000 THB per month)</span>.</p>
+                                                    <p class="th-text"><strong>การวิเคราะห์เชิงพาณิชย์และกลยุทธ์ราคา:</strong> ออกแบบโปรโมชั่นภายในร้านและปรับโครงสร้างราคาใหม่ จนมีส่วนช่วยให้ <strong>กำไรสุทธิเพิ่มขึ้น 36% ภายใน 3 เดือน</strong> <span class="text-gray-500">(ประมาณ 200,000 บาทต่อเดือน)</span></p>
+                                                </div>
+                                            </div>
+                                            <div class="ml-5 md:ml-6 mt-2 space-y-2 text-gray-500">
+                                                <p class="en-text">• Managed a highly competitive market by classifying products into <strong>traffic drivers, profit generators, and volume builders</strong>, then adjusting pricing based on each role and daily market conditions.</p>
+                                                <p class="th-text">• บริหารตลาดที่มีการแข่งขันสูง โดยจัดประเภทสินค้าเป็น <strong>traffic drivers, profit generators และ volume builders</strong> แล้วปรับราคาตามบทบาทของสินค้าแต่ละกลุ่มและสถานการณ์ตลาดรายวัน</p>
+                                                <p class="en-text">• Leveraged AI technology and on-site qualitative research to analyze price sensitivity across product categories, refining pricing structures to accurately reflect market reality.</p>
+                                                <p class="th-text">• ใช้เทคโนโลยี AI ร่วมกับการวิจัยเชิงคุณภาพหน้างาน เพื่อวิเคราะห์ความอ่อนไหวด้านราคาของแต่ละหมวดสินค้า และปรับโครงสร้างราคาให้สะท้อนสภาพตลาดจริงได้แม่นยำมากขึ้น</p>
+                                            </div>
                                         </li>
-                                        <li class="flex items-start gap-2"><i class="fas fa-play text-netred text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
-                                            <span class="en-text"><strong>Operations:</strong> Managed stock and inventory optimization.</span>
-                                            <span class="th-text"><strong>ปฏิบัติการ:</strong> บริหารจัดการสต็อกและปรับปรุงการจัดเก็บสินค้าเพื่อลดความสูญเสีย</span>
+
+                                        <li>
+                                            <div class="flex items-start gap-2"><i class="fas fa-play text-netred text-[8px] md:text-[10px] mt-1 shrink-0"></i>
+                                                <div>
+                                                    <p class="en-text"><strong>Operations & Process Optimization:</strong> Managed warehouse operations and stock planning, reducing excess stock loss by <strong>49%</strong> <span class="text-gray-500">(around 70,000 THB per month)</span>.</p>
+                                                    <p class="th-text"><strong>การปฏิบัติการและการปรับปรุงกระบวนการ:</strong> ดูแลการปฏิบัติงานคลังสินค้าและการวางแผนสต็อก ลดความสูญเสียจากสต็อกส่วนเกินได้ <strong>49%</strong> <span class="text-gray-500">(ประมาณ 70,000 บาทต่อเดือน)</span></p>
+                                                </div>
+                                            </div>
+                                            <div class="ml-5 md:ml-6 mt-2 space-y-2 text-gray-500">
+                                                <p class="en-text">• Built a <strong>data-driven inventory ordering model</strong> using historical data to improve stock balance, reduce waste, and support better ordering decisions. The model was later adopted as a standard practice in multiple branches nationwide.</p>
+                                                <p class="th-text">• สร้าง <strong>data-driven inventory ordering model</strong> จากข้อมูลย้อนหลัง เพื่อปรับสมดุลสต็อก ลดของเสีย และช่วยให้การสั่งซื้อแม่นยำขึ้น โดยโมเดลนี้ถูกนำไปใช้ต่อเป็นแนวปฏิบัติมาตรฐานในหลายสาขาทั่วประเทศ</p>
+                                                <p class="en-text">• Enhanced warehouse efficiency by designing solutions based on real-world operational insights and user experience. Integrated AI-driven analytics to establish automated workflows that minimize errors and accelerate stock management.</p>
+                                                <p class="th-text">• เพิ่มประสิทธิภาพคลังสินค้าโดยออกแบบแนวทางแก้ปัญหาจาก operational insights และประสบการณ์ผู้ใช้งานจริง พร้อมผสาน AI-driven analytics เพื่อสร้าง workflow อัตโนมัติที่ลดความผิดพลาดและเร่งความเร็วในการจัดการสต็อก</p>
+                                                <p class="en-text">• Utilized <strong>Google Apps Script</strong> to develop an interactive dashboard for seamless communication between Management and Operations.</p>
+                                                <p class="th-text">• ใช้ <strong>Google Apps Script</strong> พัฒนา interactive dashboard เพื่อให้การสื่อสารระหว่างฝ่ายบริหารและฝ่ายปฏิบัติการเชื่อมต่อกันได้อย่างราบรื่น</p>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
+
                                 <div>
                                     <h4 class="text-white font-bold mb-2 text-sm md:text-base">
-                                        <span class="en-text">2. CPF x Makro (Northeast) - Processed Product</span>
-                                        <span class="th-text">2. CPF x Makro (ภาคอีสาน) - สินค้าแปรรูป</span>
+                                        <span class="en-text">Project: CPF x Makro Northeast (Processed Product Synergy)</span>
+                                        <span class="th-text">โครงการ: CPF x Makro Northeast (Processed Product Synergy)</span>
                                     </h4>
-                                    <ul class="space-y-2 text-xs md:text-sm text-gray-400">
-                                        <li class="flex items-start gap-2"><i class="fas fa-play text-netred text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
-                                            <span class="en-text"><strong>Sales Flow:</strong> Streamlined operator workflows for efficiency.</span>
-                                            <span class="th-text"><strong>กระบวนการทำงาน:</strong> ปรับปรุงขั้นตอนการทำงานของพนักงานขายให้มีประสิทธิภาพมากขึ้น</span>
-                                        </li>
-                                        <li class="flex items-start gap-2"><i class="fas fa-play text-netred text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
-                                            <span class="en-text"><strong>Profit Growth:</strong> Achieved a <strong>36% net profit increase</strong> in 3 months.</span>
-                                            <span class="th-text"><strong>การเติบโต:</strong> ปรับโครงสร้างราคาจนบรรลุเป้าหมาย <strong>กำไรสุทธิเพิ่มขึ้น 36%</strong> ภายใน 3 เดือน</span>
+                                    <p class="text-netred text-xs md:text-sm italic mb-4">
+                                        <span class="en-text">Key Theme: “Aligning people, markets, and growth”</span>
+                                        <span class="th-text">ธีมหลัก: “Aligning people, markets, and growth”</span>
+                                    </p>
+                                    <ul class="space-y-4 text-xs md:text-sm text-gray-400">
+                                        <li>
+                                            <div class="flex items-start gap-2"><i class="fas fa-play text-netred text-[8px] md:text-[10px] mt-1 shrink-0"></i>
+                                                <div>
+                                                    <p class="en-text"><strong>Sales Strategy Development:</strong> Designed and implemented field sales strategies for processed products, improving market coverage across the Northeast region.</p>
+                                                    <p class="th-text"><strong>การพัฒนากลยุทธ์การขาย:</strong> ออกแบบและนำกลยุทธ์การขายภาคสนามสำหรับสินค้าแปรรูปไปใช้จริง ช่วยเพิ่มการครอบคลุมตลาดทั่วภาคตะวันออกเฉียงเหนือ</p>
+                                                </div>
+                                            </div>
+                                            <div class="ml-5 md:ml-6 mt-2 space-y-2 text-gray-500">
+                                                <p class="en-text">• One of the main challenges was creating clear communication and a shared direction across different branches and teams.</p>
+                                                <p class="th-text">• หนึ่งในความท้าทายหลักคือการสร้างการสื่อสารที่ชัดเจนและทิศทางร่วมกันระหว่างหลายสาขาและหลายทีม</p>
+                                                <p class="en-text">• Oversaw the entire Northeastern region, involving close collaboration with a sales team and branch managers totaling <strong>350 personnel</strong>. Managed the challenge of ensuring clear communication and a shared vision across a vast geographic area and a customer base of <strong>50,000 accounts</strong>.</p>
+                                                <p class="th-text">• ดูแลพื้นที่ภาคตะวันออกเฉียงเหนือทั้งหมด โดยทำงานใกล้ชิดกับทีมขายและผู้จัดการสาขารวม <strong>350 คน</strong> พร้อมรับมือกับความท้าทายในการสื่อสารและสร้างวิสัยทัศน์ร่วมกันในพื้นที่ขนาดใหญ่และฐานลูกค้ากว่า <strong>50,000 บัญชี</strong></p>
+                                                <p class="en-text">• Executed field sales plans by prioritizing high-volume clients and categorizing segments for efficiency. Developed sales tools <span class="text-gray-300">(Catalogs, SOPs)</span> and a <strong>profit-per-plate</strong> value proposition strategy, resulting in a <strong>5.4% increase in sales revenue</strong> <span class="text-gray-500">(1,100,000 THB monthly)</span>.</p>
+                                                <p class="th-text">• ดำเนินแผนขายภาคสนามโดยให้ความสำคัญกับลูกค้าปริมาณสูงและแบ่งกลุ่มลูกค้าเพื่อเพิ่มประสิทธิภาพ พัฒนาเครื่องมือการขาย <span class="text-gray-300">(Catalogs, SOPs)</span> และกลยุทธ์คุณค่าแบบ <strong>profit-per-plate</strong> ส่งผลให้ <strong>รายได้จากการขายเพิ่มขึ้น 5.4%</strong> <span class="text-gray-500">(ประมาณ 1,100,000 บาทต่อเดือน)</span></p>
+                                                <p class="en-text">• Utilized AI to filter for <strong>high-value prospects</strong>, enabling the sales team to concentrate efforts on high-impact opportunities, optimizing field operations for maximum results.</p>
+                                                <p class="th-text">• ใช้ AI คัดกรอง <strong>high-value prospects</strong> เพื่อให้ทีมขายโฟกัสกับโอกาสที่มีผลกระทบสูง และเพิ่มประสิทธิภาพการทำงานภาคสนามให้เกิดผลลัพธ์สูงสุด</p>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
@@ -388,14 +409,24 @@
                         <div class="accordion-inner bg-[#111] border-t border-gray-800">
                             <div class="p-4 md:p-6 md:pl-20 text-xs md:text-sm text-gray-400 space-y-4">
                                 <div>
-                                    <p class="text-white font-bold mb-1"><i class="fas fa-flag text-pink-500 mr-2"></i>
+                                    <p class="text-white font-bold mb-3"><i class="fas fa-flag text-pink-500 mr-2"></i>
                                         <span class="en-text">Activities Director / Project Manager</span>
                                         <span class="th-text">ประธานฝ่ายกิจกรรม / ผู้จัดการโครงการ</span>
                                     </p>
-                                    <p>
-                                        <span class="en-text">Led Academic Club activities, organized 4 CSR camps. Renovated Wat Khao Chong Lab School and reforested wildlife sanctuary.</span>
-                                        <span class="th-text">ผู้นำจัดกิจกรรมชมรมวิชาการ และค่ายอาสาพัฒนา 4 แห่ง (ปรับปรุงโรงเรียนวัดเขาช่อง, ปลูกป่า ณ เขตรักษาพันธุ์สัตว์ป่าแม่น้ำชี ฯลฯ)</span>
-                                    </p>
+                                    <ul class="space-y-2">
+                                        <li class="flex items-start gap-2"><i class="fas fa-play text-pink-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i>
+                                            <span class="en-text">Led academic club initiatives and student activities, balancing academic responsibilities with project planning, team coordination, and event execution.</span>
+                                            <span class="th-text">เป็นผู้นำกิจกรรมชมรมวิชาการและกิจกรรมนักศึกษา ควบคู่กับการวางแผนโครงการ การประสานงานทีม และการลงมือจัดกิจกรรมจริง</span>
+                                        </li>
+                                        <li class="flex items-start gap-2"><i class="fas fa-play text-pink-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i>
+                                            <span class="en-text">Organized <strong>4 CSR camps</strong>, taking ownership of planning, logistics, budgeting, and on-ground problem solving for large student teams.</span>
+                                            <span class="th-text">จัดค่ายอาสา <strong>4 โครงการ</strong> โดยรับผิดชอบทั้งการวางแผน โลจิสติกส์ งบประมาณ และการแก้ปัญหาเฉพาะหน้าในการทำงานร่วมกับทีมนักศึกษาขนาดใหญ่</span>
+                                        </li>
+                                        <li class="flex items-start gap-2"><i class="fas fa-play text-pink-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i>
+                                            <span class="en-text">Contributed to school renovation at Wat Khao Chong Lab School and reforestation activities in a wildlife sanctuary, strengthening leadership and community impact experience.</span>
+                                            <span class="th-text">มีส่วนร่วมในการปรับปรุงโรงเรียนวัดเขาช่องและกิจกรรมปลูกป่าในเขตรักษาพันธุ์สัตว์ป่า ช่วยเสริมทั้งทักษะการเป็นผู้นำและประสบการณ์สร้างผลกระทบเชิงสังคม</span>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -422,13 +453,17 @@
                         <div class="accordion-inner bg-[#111] border-t border-gray-800">
                             <div class="p-4 md:p-6 md:pl-20 text-xs md:text-sm text-gray-400">
                                 <ul class="space-y-2">
-                                    <li class="flex items-start gap-2"><i class="fas fa-play text-blue-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
-                                        <span class="en-text">Delivered lectures to Civil Engineering students.</span>
-                                        <span class="th-text">บรรยายให้ความรู้แก่นักศึกษาปริญญาตรี ภาควิชาวิศวกรรมโยธา</span>
+                                    <li class="flex items-start gap-2"><i class="fas fa-play text-blue-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i>
+                                        <span class="en-text"><strong>Technical Teaching:</strong> Delivered lectures to Civil Engineering students, translating technical concepts into structured and easy-to-follow lessons.</span>
+                                        <span class="th-text"><strong>การถ่ายทอดความรู้เชิงเทคนิค:</strong> บรรยายให้แก่นักศึกษาวิศวกรรมโยธา โดยเรียบเรียงเนื้อหายากให้เป็นบทเรียนที่เป็นระบบและเข้าใจง่าย</span>
                                     </li>
-                                    <li class="flex items-start gap-2"><i class="fas fa-play text-blue-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
-                                        <span class="en-text">Conducted SAP2000 workshops for truss bridge design.</span>
-                                        <span class="th-text">จัดเวิร์คชอปสอนการใช้โปรแกรม SAP2000 เบื้องต้นในการออกแบบโครงสร้าง</span>
+                                    <li class="flex items-start gap-2"><i class="fas fa-play text-blue-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i>
+                                        <span class="en-text"><strong>Workshop Facilitation:</strong> Conducted hands-on SAP2000 workshops focused on truss bridge design and basic structural modelling.</span>
+                                        <span class="th-text"><strong>การจัดเวิร์กชอป:</strong> จัดอบรมเชิงปฏิบัติการการใช้ SAP2000 โดยเน้นการออกแบบโครงข้อหมุนและการสร้างแบบจำลองโครงสร้างเบื้องต้น</span>
+                                    </li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-play text-blue-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i>
+                                        <span class="en-text"><strong>Communication Skill:</strong> Strengthened public speaking and mentoring ability through direct interaction with university students in a classroom setting.</span>
+                                        <span class="th-text"><strong>ทักษะการสื่อสาร:</strong> พัฒนาการพูดต่อหน้าคน การอธิบาย และการเป็นพี่เลี้ยง ผ่านการทำงานร่วมกับนักศึกษาในห้องเรียนจริง</span>
                                     </li>
                                 </ul>
                             </div>
@@ -456,13 +491,17 @@
                         <div class="accordion-inner bg-[#111] border-t border-gray-800">
                             <div class="p-4 md:p-6 md:pl-20 text-xs md:text-sm text-gray-400">
                                 <ul class="space-y-2">
-                                    <li class="flex items-start gap-2"><i class="fas fa-play text-orange-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
-                                        <span class="en-text"><strong>Project Management:</strong> Managed cost estimation and design for a packaging building extension (1.5M THB budget).</span>
-                                        <span class="th-text"><strong>การบริหารโครงการ:</strong> ประเมินราคาและออกแบบส่วนต่อขยายอาคารบรรจุภัณฑ์ (งบประมาณ 1.5 ล้านบาท)</span>
+                                    <li class="flex items-start gap-2"><i class="fas fa-play text-orange-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i>
+                                        <span class="en-text"><strong>Capex Project Support:</strong> Managed cost estimation and concept design for a packaging building extension project with a <strong>1.5M THB budget</strong>.</span>
+                                        <span class="th-text"><strong>สนับสนุนโครงการลงทุน:</strong> รับผิดชอบการประเมินต้นทุนและออกแบบแนวคิดสำหรับโครงการขยายอาคารบรรจุภัณฑ์มูลค่า <strong>1.5 ล้านบาท</strong></span>
                                     </li>
-                                    <li class="flex items-start gap-2"><i class="fas fa-play text-orange-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
-                                        <span class="en-text">Oversaw entire project lifecycle: site assessment, structural design, BOQ preparation, and securing final approval.</span>
-                                        <span class="th-text">ดูแลโครงการตั้งแต่ประเมินพื้นที่ ออกแบบโครงสร้าง จัดทำ BOQ จนถึงการขออนุมัติเริ่มการก่อสร้าง</span>
+                                    <li class="flex items-start gap-2"><i class="fas fa-play text-orange-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i>
+                                        <span class="en-text"><strong>End-to-End Coordination:</strong> Oversaw the project flow from site assessment and structural design to BOQ preparation and approval submission.</span>
+                                        <span class="th-text"><strong>ดูแลกระบวนการแบบครบวงจร:</strong> ติดตามงานตั้งแต่การสำรวจหน้างาน ออกแบบโครงสร้าง จัดทำ BOQ ไปจนถึงขั้นตอนเสนออนุมัติโครงการ</span>
+                                    </li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-play text-orange-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i>
+                                        <span class="en-text"><strong>Engineering Decision Support:</strong> Worked across technical and operational requirements to prepare a feasible design aligned with plant constraints and business needs.</span>
+                                        <span class="th-text"><strong>สนับสนุนการตัดสินใจเชิงวิศวกรรม:</strong> ทำงานเชื่อมระหว่างข้อกำหนดทางเทคนิคและความต้องการหน้างาน เพื่อให้แบบที่จัดทำมีความเป็นไปได้และสอดคล้องกับข้อจำกัดของโรงงาน</span>
                                     </li>
                                 </ul>
                             </div>
@@ -490,13 +529,17 @@
                         <div class="accordion-inner bg-[#111] border-t border-gray-800">
                             <div class="p-4 md:p-6 md:pl-20 text-xs md:text-sm text-gray-400">
                                 <ul class="space-y-2">
-                                    <li class="flex items-start gap-2"><i class="fas fa-play text-yellow-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
-                                        <span class="en-text"><strong>Project Delivery:</strong> Oversaw wastewater system construction, ensuring 100% completion in 1.5 months (2.4M THB value).</span>
-                                        <span class="th-text"><strong>การส่งมอบโครงการ:</strong> ควบคุมงานระบบน้ำเสียมูลค่า 2.4 ล้านบาท ให้เสร็จสมบูรณ์ 100% ภายใน 1.5 เดือน</span>
+                                    <li class="flex items-start gap-2"><i class="fas fa-play text-yellow-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i>
+                                        <span class="en-text"><strong>Construction Delivery:</strong> Supervised wastewater system construction valued at <strong>2.4M THB</strong>, achieving <strong>100% completion</strong> within 1.5 months.</span>
+                                        <span class="th-text"><strong>ส่งมอบงานก่อสร้าง:</strong> ควบคุมงานก่อสร้างระบบบำบัดน้ำเสียมูลค่า <strong>2.4 ล้านบาท</strong> จนแล้วเสร็จ <strong>100%</strong> ภายใน 1.5 เดือน</span>
                                     </li>
-                                    <li class="flex items-start gap-2"><i class="fas fa-play text-yellow-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
-                                        <span class="en-text"><strong>Budget Management:</strong> Supervised daily operations, labor costs, and payroll for a >20-person team within a 300,000 THB monthly budget.</span>
-                                        <span class="th-text"><strong>การจัดการงบประมาณ:</strong> ควบคุมการปฏิบัติงานและบริหารจัดการต้นทุนค่าแรงของพนักงานกว่า 20 คน ให้อยู่ในงบ 300,000 บาท/เดือน</span>
+                                    <li class="flex items-start gap-2"><i class="fas fa-play text-yellow-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i>
+                                        <span class="en-text"><strong>Site Operations Control:</strong> Managed daily site activities, contractor coordination, and work progress tracking to keep execution on schedule.</span>
+                                        <span class="th-text"><strong>ควบคุมงานภาคสนาม:</strong> ดูแลงานประจำวันในไซต์ ประสานผู้รับเหมา และติดตามความคืบหน้างานอย่างใกล้ชิดเพื่อให้งานเดินตามแผน</span>
+                                    </li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-play text-yellow-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i>
+                                        <span class="en-text"><strong>Budget & Team Management:</strong> Controlled labor costs and payroll for a <strong>20+ person team</strong> within a <strong>300,000 THB monthly budget</strong>.</span>
+                                        <span class="th-text"><strong>บริหารงบประมาณและทีมงาน:</strong> ควบคุมค่าแรงและการจ่ายเงินให้ทีมงาน <strong>มากกว่า 20 คน</strong> ภายใต้งบประมาณ <strong>300,000 บาทต่อเดือน</strong></span>
                                     </li>
                                 </ul>
                             </div>
@@ -526,15 +569,15 @@
                                 <div>
                                     <h4 class="text-yellow-500 font-bold mb-1 text-sm md:text-base"><i class="fas fa-medal mr-2"></i>Gold Prize (SIIF)</h4>
                                     <p class="text-xs md:text-sm text-gray-400">
-                                        <span class="en-text">Seoul International Invention Fair: Recognized for innovation in machine design.</span>
-                                        <span class="th-text">งานประกวดนวัตกรรมนานาชาติ ณ กรุงโซล: ได้รับรางวัลจากผลงานการออกแบบเครื่องจักร</span>
+                                        <span class="en-text">Received international recognition at the Seoul International Invention Fair for an innovation in machine design, highlighting creativity, practicality, and engineering application.</span>
+                                        <span class="th-text">ได้รับรางวัลระดับนานาชาติจากงาน Seoul International Invention Fair จากผลงานด้านการออกแบบเครื่องจักร ซึ่งสะท้อนทั้งความคิดสร้างสรรค์ การใช้งานได้จริง และการประยุกต์ความรู้ทางวิศวกรรม</span>
                                     </p>
                                 </div>
                                 <div>
                                     <h4 class="text-gray-300 font-bold mb-1 text-sm md:text-base"><i class="fas fa-award mr-2"></i>1st Runner-up (YSC)</h4>
                                     <p class="text-xs md:text-sm text-gray-400">
-                                        <span class="en-text">Young Scientist Competition: Developed wood replacement material from bagasse.</span>
-                                        <span class="th-text">พัฒนาวัสดุทดแทนไม้จากชานอ้อย ยางพารา และซิลิกา เพื่อเพิ่มประสิทธิภาพการใช้งาน</span>
+                                        <span class="en-text">Won 1st Runner-up in the Young Scientist Competition by developing a wood replacement material from bagasse, rubber, and silica to improve material performance and sustainability.</span>
+                                        <span class="th-text">ได้รับรางวัลรองชนะเลิศอันดับ 1 ในโครงการ Young Scientist Competition จากการพัฒนาวัสดุทดแทนไม้จากชานอ้อย ยางพารา และซิลิกา เพื่อเพิ่มทั้งประสิทธิภาพการใช้งานและความยั่งยืน</span>
                                     </p>
                                 </div>
                             </div>
@@ -546,7 +589,7 @@
         </div>
     </section>
 
-    <!-- Skills Section (Netflix Poster Grid Style) -->
+    <!-- Skills Section -->
     <section id="skills" class="py-16 md:py-24 border-t border-gray-800 bg-[#0a0a0a] scroll-mt-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl md:text-4xl font-heading text-white mb-2 border-l-4 border-netred pl-4">
@@ -558,9 +601,7 @@
                 <span class="th-text">แตะที่โลโก้เพื่อดูรายละเอียดการใช้งาน</span>
             </p>
 
-            <!-- Logo Grid -->
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
-                
                 <button onclick="openSkillModal('excel')" class="skill-card aspect-[3/4] bg-netcard border border-gray-800 rounded-md flex flex-col items-center justify-center gap-3 md:gap-4 hover:bg-black group">
                     <i class="fas fa-file-excel text-4xl md:text-5xl text-[#217346] group-hover:scale-110 transition-transform"></i>
                     <span class="font-bold text-gray-300 tracking-wider text-xs md:text-sm">Excel</span>
@@ -590,56 +631,162 @@
                     <i class="fas fa-file-code text-4xl md:text-5xl text-[#4285F4] group-hover:scale-110 transition-transform"></i>
                     <span class="font-bold text-gray-300 tracking-wider text-xs text-center px-1 md:text-sm md:px-2">Apps Script</span>
                 </button>
-
             </div>
         </div>
     </section>
 
-    <!-- Netflix Style Skill Modal -->
-    <!-- Changed to snap to bottom on mobile (Bottom Sheet) -->
+    <!-- Skill Modal -->
     <div id="skill-modal" class="fixed inset-x-0 bottom-0 top-auto sm:inset-0 z-[100] hidden flex-col sm:items-center sm:justify-center">
-        <!-- Backdrop -->
         <div class="fixed inset-0 bg-black/80 backdrop-blur-sm sm:absolute" onclick="closeSkillModal()"></div>
-        
-        <!-- Modal Content Box (Bottom Sheet on Mobile, Centered on Desktop) -->
         <div class="relative w-full sm:max-w-3xl bg-netcard border border-gray-800 rounded-t-2xl sm:rounded-lg shadow-[0_-10px_40px_rgba(0,0,0,0.5)] sm:shadow-2xl overflow-hidden animate-modal-pop mt-auto sm:mt-0 max-h-[85vh] sm:max-h-none overflow-y-auto">
-            
-            <!-- Mobile Grabber Bar -->
             <div class="w-full flex justify-center py-3 sm:hidden" onclick="closeSkillModal()">
                 <div class="w-12 h-1.5 bg-gray-600 rounded-full"></div>
             </div>
-
-            <!-- Close Btn (Desktop) -->
             <button onclick="closeSkillModal()" class="hidden sm:flex absolute top-4 right-4 z-10 w-10 h-10 bg-[#181818]/80 rounded-full items-center justify-center text-white hover:bg-white hover:text-black transition-colors">
                 <i class="fas fa-times text-xl"></i>
             </button>
-
-            <!-- Top Banner Visual -->
             <div class="h-32 md:h-56 w-full bg-gradient-to-b from-gray-800 to-netcard flex items-center justify-center relative">
                 <div class="absolute inset-0 bg-black/40"></div>
                 <i id="modal-icon" class="fas fa-code text-6xl md:text-7xl relative z-10 drop-shadow-2xl"></i>
             </div>
-
-            <!-- Content Area -->
             <div class="px-5 md:px-10 pb-8 sm:pb-10 pt-2 sm:pt-4">
                 <h3 id="modal-title" class="text-3xl md:text-5xl font-heading text-white mb-2">Skill Title</h3>
-                
                 <div class="flex items-center gap-3 mb-5 md:mb-6">
                     <span class="text-green-500 font-bold text-xs md:text-sm">99% Match</span>
                     <span class="border border-gray-600 px-1 text-[10px] md:text-xs text-gray-400">PRO</span>
                 </div>
-                
                 <p class="text-white font-bold text-sm md:text-base mb-3">
                     <span class="en-text">How I use it:</span>
                     <span class="th-text">ลักษณะการนำไปใช้งาน:</span>
                 </p>
-                
-                <div id="modal-desc" class="space-y-3">
-                    <!-- Dynamic Content Injected via JS -->
-                </div>
+                <div id="modal-desc" class="space-y-3"></div>
             </div>
         </div>
     </div>
+
+    <!-- Leadership & Volunteer Experience -->
+    <section id="leadership" class="py-16 md:py-24 border-t border-gray-800 bg-netbg scroll-mt-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-heading text-white mb-2 border-l-4 border-netred pl-4">
+                <span class="en-text">Leadership & Volunteer Experience</span>
+                <span class="th-text">ภาวะผู้นำและงานอาสา</span>
+            </h2>
+            <p class="text-gray-400 mb-8 md:mb-10 pl-5 text-sm">
+                <span class="en-text">Experiences that reflect leadership, service mindset, and community impact.</span>
+                <span class="th-text">ประสบการณ์ที่สะท้อนภาวะผู้นำ จิตอาสา และการสร้างผลกระทบต่อสังคม</span>
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+                <div class="bg-netcard border border-gray-800 rounded-md p-5 md:p-6 hover:border-netred transition-colors">
+                    <div class="flex items-start gap-3">
+                        <div class="text-netred text-xl pt-1"><i class="fas fa-hands-helping"></i></div>
+                        <div>
+                            <h3 class="text-white font-bold text-base md:text-lg mb-1">
+                                <span class="en-text">Academic Club CSR Camp</span>
+                                <span class="th-text">ค่ายอาสาชมรมวิชาการ</span>
+                            </h3>
+                            <p class="text-netred text-xs md:text-sm mb-3">
+                                <span class="en-text">Ratchaburi & Trang | 2023-2024</span>
+                                <span class="th-text">ราชบุรี และ ตรัง | 2023-2024</span>
+                            </p>
+                            <p class="text-gray-400 text-xs md:text-sm leading-relaxed en-text">Renovated Wat Khao Chong Lab School and Hoi Yot School, while also leading reforestation activities at Mae Nam Lum Chee Wildlife Sanctuary. Strengthened teamwork, project execution, and community engagement through hands-on volunteer work.</p>
+                            <p class="text-gray-400 text-xs md:text-sm leading-relaxed th-text">ร่วมปรับปรุงโรงเรียนวัดเขาช่องและโรงเรียนห้วยยอด พร้อมทั้งมีบทบาทในการนำกิจกรรมปลูกป่าที่เขตรักษาพันธุ์สัตว์ป่าแม่น้ำพรมชี ช่วยเสริมทักษะการทำงานเป็นทีม การลงมือทำโครงการจริง และการสร้างประโยชน์ให้ชุมชน</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-netcard border border-gray-800 rounded-md p-5 md:p-6 hover:border-netred transition-colors">
+                    <div class="flex items-start gap-3">
+                        <div class="text-netred text-xl pt-1"><i class="fas fa-water"></i></div>
+                        <div>
+                            <h3 class="text-white font-bold text-base md:text-lg mb-1">
+                                <span class="en-text">Building Camp</span>
+                                <span class="th-text">ค่ายสร้างฝาย</span>
+                            </h3>
+                            <p class="text-netred text-xs md:text-sm mb-3">
+                                <span class="en-text">Nan | 2022</span>
+                                <span class="th-text">น่าน | 2022</span>
+                            </p>
+                            <p class="text-gray-400 text-xs md:text-sm leading-relaxed en-text">Constructed a water storage weir and sediment trap weir to support sustainable water management for the local community. Learned practical construction planning, field coordination, and problem solving in real-site conditions.</p>
+                            <p class="text-gray-400 text-xs md:text-sm leading-relaxed th-text">ร่วมก่อสร้างฝายกักเก็บน้ำและฝายดักตะกอน เพื่อสนับสนุนการบริหารจัดการน้ำอย่างยั่งยืนให้กับชุมชน ได้เรียนรู้การวางแผนงานก่อสร้าง การประสานงานภาคสนาม และการแก้ปัญหาในสภาพหน้างานจริง</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-netcard border border-gray-800 rounded-md p-5 md:p-6 hover:border-netred transition-colors">
+                    <div class="flex items-start gap-3">
+                        <div class="text-netred text-xl pt-1"><i class="fas fa-chalkboard-teacher"></i></div>
+                        <div>
+                            <h3 class="text-white font-bold text-base md:text-lg mb-1">
+                                <span class="en-text">Teaching Camp (FUNFUENG 19th & 20th)</span>
+                                <span class="th-text">ค่ายสอนน้อง ฟันเฟือง ครั้งที่ 19 และ 20</span>
+                            </h3>
+                            <p class="text-netred text-xs md:text-sm mb-3">
+                                <span class="en-text">Khon Kaen & Kanchanaburi | 2021</span>
+                                <span class="th-text">ขอนแก่น และ กาญจนบุรี | 2021</span>
+                            </p>
+                            <p class="text-gray-400 text-xs md:text-sm leading-relaxed en-text">Delivered Physics and Chemistry lessons to high school students and provided guidance on university admissions. Developed communication, mentoring, and the ability to explain complex ideas in a simple and motivating way.</p>
+                            <p class="text-gray-400 text-xs md:text-sm leading-relaxed th-text">สอนวิชาฟิสิกส์และเคมีให้แก่นักเรียนระดับมัธยมศึกษา พร้อมให้คำแนะนำเรื่องการเข้าศึกษาต่อในมหาวิทยาลัย ช่วยพัฒนาทักษะการสื่อสาร การเป็นพี่เลี้ยง และการอธิบายเรื่องยากให้เข้าใจง่ายและสร้างแรงบันดาลใจ</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-netcard border border-gray-800 rounded-md p-5 md:p-6 hover:border-netred transition-colors">
+                    <div class="flex items-start gap-3">
+                        <div class="text-netred text-xl pt-1"><i class="fas fa-project-diagram"></i></div>
+                        <div>
+                            <h3 class="text-white font-bold text-base md:text-lg mb-1">
+                                <span class="en-text">Project Manager – Engineering Project Camp 52nd</span>
+                                <span class="th-text">ผู้จัดการโครงการ – ค่ายโครงการวิศวกรรม ครั้งที่ 52</span>
+                            </h3>
+                            <p class="text-netred text-xs md:text-sm mb-3">
+                                <span class="en-text">Nan | 2025</span>
+                                <span class="th-text">น่าน | 2025</span>
+                            </p>
+                            <p class="text-gray-400 text-xs md:text-sm leading-relaxed en-text">Led the development of a wastewater treatment system for a community distillery to help the production process meet required standards. Strengthened experience in project ownership, stakeholder coordination, and engineering-for-community impact.</p>
+                            <p class="text-gray-400 text-xs md:text-sm leading-relaxed th-text">รับบทบาทผู้จัดการโครงการในการพัฒนาระบบบำบัดน้ำเสียสำหรับโรงกลั่นชุมชน เพื่อช่วยให้กระบวนการผลิตสอดคล้องกับมาตรฐานที่กำหนด เสริมประสบการณ์ด้านการเป็นเจ้าของโครงการ การประสานผู้มีส่วนเกี่ยวข้อง และการใช้วิศวกรรมเพื่อแก้ปัญหาให้ชุมชน</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-netcard border border-gray-800 rounded-md p-5 md:p-6 hover:border-netred transition-colors">
+                    <div class="flex items-start gap-3">
+                        <div class="text-netred text-xl pt-1"><i class="fas fa-users"></i></div>
+                        <div>
+                            <h3 class="text-white font-bold text-base md:text-lg mb-1">
+                                <span class="en-text">Head of Activities — Engineering Academic Club</span>
+                                <span class="th-text">หัวหน้าฝ่ายกิจกรรม — ชมรมวิชาการวิศวกรรม</span>
+                            </h3>
+                            <p class="text-netred text-xs md:text-sm mb-3">
+                                <span class="en-text">Leadership Role</span>
+                                <span class="th-text">บทบาทผู้นำ</span>
+                            </p>
+                            <p class="text-gray-400 text-xs md:text-sm leading-relaxed en-text">Led activity planning, internal coordination, and student engagement initiatives within the academic club. Built experience in team management, event execution, and creating meaningful participation among members.</p>
+                            <p class="text-gray-400 text-xs md:text-sm leading-relaxed th-text">ดูแลการวางแผนกิจกรรม การประสานงานภายใน และการสร้างการมีส่วนร่วมของนักศึกษาในชมรมวิชาการ ช่วยพัฒนาทักษะการบริหารทีม การจัดกิจกรรม และการสร้างการมีส่วนร่วมอย่างมีคุณค่าในกลุ่มสมาชิก</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-netcard border border-gray-800 rounded-md p-5 md:p-6 hover:border-netred transition-colors">
+                    <div class="flex items-start gap-3">
+                        <div class="text-netred text-xl pt-1"><i class="fas fa-user-graduate"></i></div>
+                        <div>
+                            <h3 class="text-white font-bold text-base md:text-lg mb-1">
+                                <span class="en-text">CHAMP Engineering Mentorship Program</span>
+                                <span class="th-text">โครงการพี่เลี้ยง CHAMP Engineering</span>
+                            </h3>
+                            <p class="text-netred text-xs md:text-sm mb-3">
+                                <span class="en-text">Selected Mentee | 6-Month Program</span>
+                                <span class="th-text">ผู้ได้รับคัดเลือก | โปรแกรม 6 เดือน</span>
+                            </p>
+                            <p class="text-gray-400 text-xs md:text-sm leading-relaxed en-text">Selected as a mentee in the CHAMP Engineering 6-month mentorship program, gaining exposure to personal development, leadership mindset, and structured career guidance from experienced mentors.</p>
+                            <p class="text-gray-400 text-xs md:text-sm leading-relaxed th-text">ได้รับคัดเลือกเป็น mentee ในโครงการ CHAMP Engineering ระยะเวลา 6 เดือน ได้เรียนรู้การพัฒนาตนเอง แนวคิดความเป็นผู้นำ และการวางเส้นทางอาชีพอย่างเป็นระบบจากพี่เลี้ยงที่มีประสบการณ์</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="py-16 md:py-24 border-t border-gray-800 bg-netbg relative scroll-mt-12">
@@ -652,7 +799,6 @@
                 <span class="en-text">I am currently open to new opportunities. Let's connect!</span>
                 <span class="th-text">ปัจจุบันผมเปิดรับโอกาสใหม่ๆ ในการทำงาน สามารถติดต่อพูดคุยกันได้เลยครับ</span>
             </p>
-            
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 mb-10 md:mb-12">
                 <a href="mailto:catawut.forjobs2002@gmail.com" class="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 bg-netcard border border-gray-800 hover:border-netred rounded flex items-center justify-center gap-3 text-white transition-colors text-sm md:text-base">
                     <i class="fas fa-envelope text-netred text-lg md:text-xl"></i> catawut.forjobs2002@gmail.com
@@ -661,7 +807,6 @@
                     <i class="fas fa-phone text-netred text-lg md:text-xl"></i> 080-997-9844
                 </a>
             </div>
-
             <div class="border-t border-gray-800 pt-8 flex justify-center gap-6 pb-6 md:pb-0">
                 <a href="https://www.linkedin.com/in/catawut-phormrin-8ab40a315" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-white transition-colors text-3xl">
                     <i class="fab fa-linkedin"></i>
@@ -670,12 +815,10 @@
         </div>
     </section>
 
-    <!-- Scripts -->
     <script>
-        // --- 1. Language Toggle Logic ---
         const btnDesktop = document.getElementById('lang-toggle');
         const btnMobile = document.getElementById('lang-toggle-mobile');
-        
+
         function toggleLanguage() {
             const body = document.body;
             if (body.classList.contains('lang-en')) {
@@ -686,11 +829,10 @@
                 body.classList.add('lang-en');
             }
         }
-        
+
         btnDesktop.addEventListener('click', toggleLanguage);
         btnMobile.addEventListener('click', toggleLanguage);
 
-        // --- 2. Accordion Logic ---
         function toggleAccordion(id, btnElement) {
             const content = document.getElementById(id);
             const icon = btnElement.querySelector('.accordion-icon');
@@ -703,7 +845,6 @@
             }
         }
 
-        // --- 3. Scroll Spy for Mobile Bottom Navigation ---
         const sections = document.querySelectorAll("section");
         const navLinks = document.querySelectorAll(".bottom-nav-link");
 
@@ -711,8 +852,6 @@
             let current = "";
             sections.forEach((section) => {
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                // Add a little offset for mobile scroll
                 if (pageYOffset >= sectionTop - 150) {
                     current = section.getAttribute("id");
                 }
@@ -726,78 +865,89 @@
             });
         });
 
-        // --- 4. Netflix Skill Modal Logic ---
         const skillsData = {
             'excel': {
                 title: 'Advanced Excel',
                 iconClass: 'fas fa-file-excel text-[#217346]',
                 en: [
-                    "Performed data cleaning, reporting, and analysis to support sales planning and pricing decisions.",
-                    "Improved customer analysis by organizing data into clear and actionable segments."
+                    "Used Advanced Excel to clean, structure, and analyze sales and customer data for business planning, pricing review, and performance tracking.",
+                    "Built segmented customer views that helped identify account potential, buying patterns, and key opportunities for more focused selling.",
+                    "Turned raw operational data into clear reports that supported faster and more practical decision-making for both field staff and management."
                 ],
                 th: [
-                    "จัดการทำความสะอาดข้อมูล จัดทำรายงาน และวิเคราะห์ข้อมูลเพื่อสนับสนุนการวางแผนการขายและการตั้งราคา",
-                    "เพิ่มประสิทธิภาพในการวิเคราะห์ลูกค้า โดยการจัดหมวดหมู่ข้อมูลให้ชัดเจนและนำไปใช้ได้จริง"
+                    "ใช้ Advanced Excel ในการทำความสะอาด จัดโครงสร้าง และวิเคราะห์ข้อมูลยอดขายรวมถึงข้อมูลลูกค้า เพื่อสนับสนุนการวางแผนธุรกิจ การทบทวนราคา และการติดตามผลการดำเนินงาน",
+                    "สร้างมุมมองข้อมูลลูกค้าแบบแบ่งกลุ่ม ช่วยให้มองเห็นศักยภาพ รูปแบบการซื้อ และโอกาสสำคัญสำหรับการขายที่ตรงจุดมากขึ้น",
+                    "เปลี่ยนข้อมูลดิบจากการปฏิบัติงานให้เป็นรายงานที่ชัดเจน เพื่อช่วยให้ทั้งทีมหน้างานและผู้บริหารตัดสินใจได้เร็วและใช้งานได้จริง"
                 ]
             },
             'ai': {
                 title: 'AI Tools',
                 iconClass: 'fas fa-robot text-purple-500',
                 en: [
-                    "Leveraged AI tools to increase productivity and improve the speed of analysis.",
-                    "Used AI to generate customer insights and support more effective prospect targeting."
+                    "Applied AI tools to speed up analysis, summarize information, and improve productivity in day-to-day business tasks.",
+                    "Used AI to support customer insight generation, prospect screening, and opportunity identification based on field observations and commercial data.",
+                    "Combined AI output with human judgment and real market feedback to create more practical actions rather than relying on automation alone."
                 ],
                 th: [
-                    "ใช้เครื่องมือ AI เพื่อเพิ่มประสิทธิภาพการทำงานและเพิ่มความรวดเร็วในการวิเคราะห์ข้อมูล",
-                    "ประยุกต์ใช้ AI เพื่อสร้าง Customer Insights และสนับสนุนการเจาะกลุ่มเป้าหมายให้แม่นยำยิ่งขึ้น"
+                    "ประยุกต์ใช้เครื่องมือ AI เพื่อเร่งการวิเคราะห์ สรุปข้อมูล และเพิ่มประสิทธิภาพในการทำงานด้านธุรกิจในแต่ละวัน",
+                    "ใช้ AI เพื่อช่วยสร้าง customer insights คัดกรองกลุ่มเป้าหมาย และมองหาโอกาสทางธุรกิจจากข้อมูลเชิงพาณิชย์และข้อมูลจากหน้างาน",
+                    "ผสานผลลัพธ์จาก AI เข้ากับการตัดสินใจของคนและ feedback จากตลาดจริง เพื่อให้ได้แนวทางปฏิบัติที่ใช้ได้จริง ไม่พึ่งพา automation เพียงอย่างเดียว"
                 ]
             },
             'python': {
                 title: 'Basic Python',
                 iconClass: 'fab fa-python text-[#FFD43B]',
                 en: [
-                    "Developed basic Python skills through academic training and practice.",
-                    "Applied Python to simple data tasks and basic workflow automation."
+                    "Built a basic foundation in Python through university learning and personal practice in data-related tasks.",
+                    "Used Python for simple data handling, logical problem solving, and small workflow automation when repetitive manual work could be reduced.",
+                    "Comfortable reading and editing beginner-level scripts to support analysis and improve work efficiency."
                 ],
                 th: [
-                    "พัฒนาทักษะการเขียนโปรแกรม Python เบื้องต้นผ่านการเรียนในมหาวิทยาลัยและการฝึกฝน",
-                    "ใช้ Python ในการจัดการงานข้อมูลพื้นฐานและสร้างระบบ Automation แบบง่ายเพื่อลดขั้นตอนการทำงาน"
+                    "มีพื้นฐานการใช้ Python จากการเรียนในมหาวิทยาลัยและการฝึกฝนเพิ่มเติมกับงานด้านข้อมูล",
+                    "ใช้ Python สำหรับงานจัดการข้อมูลเบื้องต้น การแก้ปัญหาเชิงตรรกะ และการทำ automation ขนาดเล็กเพื่อลดงานที่ต้องทำซ้ำ",
+                    "สามารถอ่านและปรับแก้สคริปต์ระดับเริ่มต้นได้ เพื่อสนับสนุนการวิเคราะห์และเพิ่มประสิทธิภาพในการทำงาน"
                 ]
             },
             'sql': {
                 title: 'SQL',
                 iconClass: 'fas fa-database text-[#008BB9]',
                 en: [
-                    "Queried and managed large-scale customer data for business analysis and sales planning.",
-                    "Used SQL to support segmentation and extract useful insights from complex datasets."
+                    "Used SQL to retrieve, filter, and organize large customer datasets for sales planning and business analysis.",
+                    "Supported customer segmentation by extracting relevant variables and turning complex tables into usable business information.",
+                    "Applied SQL as a practical tool to connect raw database records with commercial insights and reporting needs."
                 ],
                 th: [
-                    "ดึงข้อมูล (Query) และจัดการฐานข้อมูลลูกค้าขนาดใหญ่ เพื่อใช้ในการวิเคราะห์ธุรกิจและวางแผนการขาย",
-                    "ใช้ SQL เพื่อสนับสนุนการจัดกลุ่มเป้าหมาย (Segmentation) และสกัดข้อมูลเชิงลึกจากชุดข้อมูลที่ซับซ้อน"
+                    "ใช้ SQL ในการดึง คัดกรอง และจัดระเบียบข้อมูลลูกค้าจำนวนมาก เพื่อนำไปใช้ในการวางแผนการขายและวิเคราะห์ธุรกิจ",
+                    "สนับสนุนการแบ่งกลุ่มลูกค้าโดยดึงตัวแปรที่เกี่ยวข้อง และเปลี่ยนตารางข้อมูลที่ซับซ้อนให้เป็นข้อมูลเชิงธุรกิจที่นำไปใช้ได้",
+                    "ใช้ SQL เป็นเครื่องมือเชื่อมระหว่างข้อมูลดิบในฐานข้อมูลกับการวิเคราะห์เชิงพาณิชย์และความต้องการด้านรายงาน"
                 ]
             },
             'powerbi': {
                 title: 'Power BI',
                 iconClass: 'fas fa-chart-bar text-[#F2C811]',
                 en: [
-                    "Built dashboards to visualize business performance and key trends.",
-                    "Supported decision-making by turning data into easy-to-understand reports."
+                    "Built dashboards to visualize sales performance, business trends, and operational results in a format that was easy to monitor.",
+                    "Helped transform scattered data into clearer management views so key issues and opportunities could be seen faster.",
+                    "Used Power BI to support communication between raw numbers and executive-level decision-making."
                 ],
                 th: [
-                    "สร้าง Dashboards เพื่อแสดงผลการดำเนินงานทางธุรกิจและแนวโน้มที่สำคัญ",
-                    "สนับสนุนการตัดสินใจของผู้บริหารโดยการเปลี่ยนข้อมูลดิบให้เป็นรายงานที่เข้าใจง่าย"
+                    "สร้างแดชบอร์ดเพื่อแสดงผลยอดขาย แนวโน้มทางธุรกิจ และผลการดำเนินงานในรูปแบบที่ติดตามได้ง่าย",
+                    "ช่วยเปลี่ยนข้อมูลที่กระจัดกระจายให้เป็นภาพรวมที่ชัดเจนขึ้นสำหรับผู้บริหาร ทำให้เห็นทั้งปัญหาและโอกาสได้เร็วขึ้น",
+                    "ใช้ Power BI เป็นเครื่องมือเชื่อมระหว่างตัวเลขดิบกับการตัดสินใจในระดับบริหาร"
                 ]
             },
             'gas': {
                 title: 'Google Apps Script',
                 iconClass: 'fas fa-file-code text-[#4285F4]',
                 en: [
-                    "Created a simple web-based dashboard to improve communication between field staff and management.",
-                    "Enhanced daily operations by making reporting and data access easier on mobile devices."
+                    "Used Google Apps Script to create a simple web-based dashboard that connected field staff and management through shared data.",
+                    "Improved reporting flow by making updates, data access, and routine tracking easier to handle on both desktop and mobile devices.",
+                    "Applied Apps Script as a lightweight automation tool to reduce friction in daily communication and operational follow-up."
                 ],
                 th: [
-                    "สร้าง Web-based Dashboard แบบง่าย เพื่อพัฒนาการสื่อสารระหว่างพนักงานลงพื้นที่และทีมบริหาร",
-                    "เพิ่มความคล่องตัวในการปฏิบัติงานประจำวัน โดยช่วยให้การรายงานและการเข้าถึงข้อมูลผ่านมือถือทำได้ง่ายขึ้น"
+                    "ใช้ Google Apps Script เพื่อสร้างแดชบอร์ดแบบ web-based อย่างง่าย ที่เชื่อมการทำงานระหว่างพนักงานหน้างานและทีมบริหารผ่านข้อมูลชุดเดียวกัน",
+                    "พัฒนาการไหลของการรายงาน โดยทำให้การอัปเดตข้อมูล การเข้าถึงข้อมูล และการติดตามงานประจำทำได้สะดวกขึ้นทั้งบนคอมพิวเตอร์และมือถือ",
+                    "ใช้ Apps Script เป็นเครื่องมือ automation แบบเบา ๆ เพื่อลดความติดขัดในการสื่อสารและการติดตามงานประจำวัน"
                 ]
             }
         };
@@ -809,13 +959,9 @@
 
         function openSkillModal(skillKey) {
             const data = skillsData[skillKey];
-            const isEnglish = document.body.classList.contains('lang-en');
-            
-            // Set Icon & Title
             modalIcon.className = `${data.iconClass} text-5xl sm:text-7xl relative z-10 drop-shadow-2xl`;
             modalTitle.innerText = data.title;
 
-            // Generate Content based on current language
             const listItems = data.en.map((enText, index) => {
                 const thText = data.th[index];
                 return `
@@ -830,19 +976,14 @@
             }).join('');
 
             modalDesc.innerHTML = listItems;
-
-            // Show Modal
             modal.classList.remove('hidden');
             modal.classList.add('flex');
-            
-            // Disable background scroll
             document.body.style.overflow = 'hidden';
         }
 
         function closeSkillModal() {
             modal.classList.add('hidden');
             modal.classList.remove('flex');
-            // Re-enable background scroll
             document.body.style.overflow = '';
         }
     </script>
