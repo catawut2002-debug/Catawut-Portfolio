@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catawut Phormrin - Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts (Netflix-like Sans-serif & Fallback for Thai) -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Prompt:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        netbg: '#141414',       // Netflix Background
+                        netcard: '#181818',     // Netflix Card Background
+                        netcardhover: '#2f2f2f',// Netflix Card Hover
+                        netred: '#E50914',      // Netflix Primary Red
+                        netredhover: '#F40612', // Netflix Red Hover
+                        netgray: '#808080',     // Netflix Subtext
+                        nettext: '#E5E5E5'      // Netflix Main Text
+                    },
+                    fontFamily: {
+                        // Set Freesia as the primary font for text, with Inter and Prompt as fallbacks
+                        sans: ['Freesia', 'Inter', 'Prompt', 'sans-serif'],
+                        heading: ['Bebas Neue', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'modal-pop': 'modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        modalPop: {
+                            '0%': { opacity: '0', transform: 'scale(0.9) translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #141414;
+            color: #E5E5E5;
+            overflow-x: hidden;
+            /* Add padding for mobile bottom nav */
+            padding-bottom: 0;
+        }
+        @media (max-width: 767px) {
+            body { padding-bottom: 70px; } /* Space for bottom nav */
+        }
+
+        /* Netflix Style Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #141414; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #E50914; }
+
+        /* Text Selection */
+        ::selection { background: #E50914; color: white; }
+
+        .glass-nav {
+            background: linear-gradient(to bottom, rgba(20,20,20,0.95) 0%, rgba(20,20,20,0.7) 100%);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Language Toggle Logic */
+        body.lang-en .th-text { display: none; }
+        body.lang-th .en-text { display: none; }
+
+        /* Smooth Accordion */
+        .accordion-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.3s ease-out;
+        }
+        .accordion-content.open { grid-template-rows: 1fr; }
+        .accordion-inner { overflow: hidden; }
+
+        /* Skill Card Hover Effect */
+        .skill-card {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+        }
+        .skill-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px -10px rgba(229, 9, 20, 0.3);
+            border-color: #E50914;
+        }
+
+        /* Mobile Bottom Sheet Animation */
+        @media (max-width: 639px) {
+            .animate-modal-pop {
+                animation: slideUp 0.3s ease-out forwards !important;
+            }
+            @keyframes slideUp {
+                0% { transform: translateY(100%); opacity: 0; }
+                100% { transform: translateY(0); opacity: 1; }
+            }
+        }
+
+        /* Bottom Nav Active State */
+        .bottom-nav-link.active {
+            color: white;
+        }
+        .bottom-nav-link.active i {
+            transform: scale(1.1);
+            color: #E50914;
+        }
+
+        /* Utility for delaying animations */
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .opacity-0 { opacity: 0; }
+    </style>
+</head>
+<body class="lang-en antialiased selection:bg-netred selection:text-white">
+
+    <!-- Top Navigation -->
+    <nav class="fixed top-0 w-full z-50 transition-all duration-300 py-4 glass-nav" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-12">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <span class="font-heading text-4xl md:text-5xl tracking-wider text-netred drop-shadow-md">CATAWUT</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#about" class="text-gray-300 hover:text-white font-medium transition-colors text-sm">
+                        <span class="en-text">About</span><span class="th-text">เกี่ยวกับ</span>
+                    </a>
+                    <a href="#journey" class="text-gray-300 hover:text-white font-medium transition-colors text-sm">
+                        <span class="en-text">Journey</span><span class="th-text">ประวัติการทำงาน</span>
+                    </a>
+                    <a href="#skills" class="text-gray-300 hover:text-white font-medium transition-colors text-sm">
+                        <span class="en-text">Skills</span><span class="th-text">ทักษะ</span>
+                    </a>
+                    <a href="#contact" class="text-gray-300 hover:text-white font-medium transition-colors text-sm mr-4">
+                        <span class="en-text">Contact</span><span class="th-text">ติดต่อ</span>
+                    </a>
+                    <!-- Language Toggle (Desktop) -->
+                    <button id="lang-toggle" class="border border-gray-600 rounded px-3 py-1 text-xs text-white hover:border-white transition-colors flex items-center gap-2">
+                        <i class="fas fa-globe"></i>
+                        <span class="en-text font-bold">EN / TH</span>
+                        <span class="th-text font-bold">TH / EN</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Controls (Language Only) -->
+                <div class="md:hidden flex items-center gap-4">
+                    <button id="lang-toggle-mobile" class="border border-gray-600 rounded px-2 py-1 text-xs text-white flex items-center gap-1 bg-netbg/50">
+                        <i class="fas fa-globe text-gray-400"></i> 
+                        <span class="en-text font-bold">TH</span>
+                        <span class="th-text font-bold">EN</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Bottom Navigation (Mobile App Style) -->
+    <nav class="md:hidden fixed bottom-0 w-full z-50 bg-[#141414]/95 backdrop-blur-lg border-t border-gray-800 flex justify-around items-center py-2 pb-safe shadow-[0_-10px_20px_rgba(0,0,0,0.5)]">
+        <a href="#about" class="bottom-nav-link flex flex-col items-center text-gray-500 transition-colors w-16 pt-1 active" data-section="about">
+            <i class="fas fa-home text-xl mb-1 transition-transform"></i>
+            <span class="text-[10px] font-medium en-text">Home</span>
+            <span class="text-[10px] font-medium th-text">หน้าแรก</span>
+        </a>
+        <a href="#journey" class="bottom-nav-link flex flex-col items-center text-gray-500 transition-colors w-16 pt-1" data-section="journey">
+            <i class="fas fa-play-circle text-xl mb-1 transition-transform"></i>
+            <span class="text-[10px] font-medium en-text">Journey</span>
+            <span class="text-[10px] font-medium th-text">ประวัติ</span>
+        </a>
+        <a href="#skills" class="bottom-nav-link flex flex-col items-center text-gray-500 transition-colors w-16 pt-1" data-section="skills">
+            <i class="fas fa-layer-group text-xl mb-1 transition-transform"></i>
+            <span class="text-[10px] font-medium en-text">Skills</span>
+            <span class="text-[10px] font-medium th-text">ทักษะ</span>
+        </a>
+        <a href="#contact" class="bottom-nav-link flex flex-col items-center text-gray-500 transition-colors w-16 pt-1" data-section="contact">
+            <i class="fas fa-user-circle text-xl mb-1 transition-transform"></i>
+            <span class="text-[10px] font-medium en-text">Contact</span>
+            <span class="text-[10px] font-medium th-text">ติดต่อ</span>
+        </a>
+    </nav>
+
+    <!-- Hero Section (Netflix Billboard Style) -->
+    <section id="about" class="relative pt-28 pb-16 md:pt-48 md:pb-32 min-h-[90vh] md:min-h-screen flex items-center scroll-mt-20">
+        <!-- Background Vignette & Gradient -->
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(229,9,20,0.15)_0%,rgba(20,20,20,1)_70%)]"></div>
+            <!-- Vignette -->
+            <div class="absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.9)] md:shadow-[inset_0_0_150px_rgba(0,0,0,0.9)]"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            
+            <div class="w-full md:w-3/5 text-center md:text-left mt-4 md:mt-0">
+                <div class="animate-fade-in-up opacity-0 inline-block px-3 py-1 bg-netcard border border-gray-800 rounded-sm text-gray-300 font-bold text-[10px] md:text-xs tracking-widest uppercase mb-4 md:mb-6">
+                    <span class="en-text">Management Trainee | Engineer | Business Analyst</span>
+                    <span class="th-text">ผู้บริหารฝึกหัด | วิศวกร | นักวิเคราะห์ธุรกิจ</span>
+                </div>
+                
+                <h1 class="animate-fade-in-up opacity-0 delay-100 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading text-white leading-none mb-4 drop-shadow-lg">
+                    <span class="en-text">DATA-DRIVEN<br/><span class="text-netred">STRATEGIST</span></span>
+                    <span class="th-text">นักกลยุทธ์ที่ขับเคลื่อนด้วย<br/><span class="text-netred">ข้อมูล</span></span>
+                </h1>
+                
+                <p class="animate-fade-in-up opacity-0 delay-200 text-base md:text-xl text-gray-400 mb-8 leading-relaxed max-w-2xl mx-auto md:mx-0">
+                    <span class="en-text">
+                        Hi, I'm <strong class="text-white">Catawut Phormrin</strong>. A highly motivated professional blending Engineering acumen with Business Strategy. Proven track record in B2B acquisition, pricing optimization, and operational excellence.
+                    </span>
+                    <span class="th-text">
+                        สวัสดีครับ ผม <strong class="text-white">คฑาวุธ พรมรินทร์</strong> ผู้เชี่ยวชาญที่นำทักษะเชิงวิเคราะห์แบบวิศวกรมาผสานกับกลยุทธ์ทางธุรกิจ มีผลงานโดดเด่นในการขยายฐานลูกค้า B2B การปรับโครงสร้างราคา และเพิ่มประสิทธิภาพการดำเนินงาน
+                    </span>
+                </p>
+                
+                <div class="animate-fade-in-up opacity-0 delay-300 flex flex-col sm:flex-row flex-wrap justify-center md:justify-start gap-3 md:gap-4">
+                    <a href="#journey" class="w-full sm:w-auto px-8 py-3 bg-white text-black rounded font-bold hover:bg-gray-200 transition-colors flex items-center justify-center gap-2">
+                        <i class="fas fa-play text-xs"></i>
+                        <span class="en-text">Explore Journey</span>
+                        <span class="th-text">ดูประวัติการทำงาน</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/catawut-phormrin-8ab40a315" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-3 bg-gray-600/70 text-white rounded font-bold hover:bg-gray-600 transition-colors flex items-center justify-center gap-2">
+                        <i class="fab fa-linkedin text-xl"></i>
+                        <span class="en-text">Connect</span>
+                        <span class="th-text">ติดต่อฉัน</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Fake Profile Visual / Achievements -->
+            <div class="w-full md:w-2/5 flex justify-center animate-fade-in-up opacity-0 delay-200 relative mt-8 md:mt-0">
+                <div class="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full border border-gray-800 bg-netcard flex flex-col items-center justify-center overflow-hidden group">
+                    <div class="absolute inset-0 bg-netred/10 group-hover:bg-netred/20 transition-colors"></div>
+                    <i class="fas fa-user-tie text-5xl md:text-7xl text-gray-600 mb-2 md:mb-4 group-hover:text-gray-400 transition-colors relative z-10"></i>
+                    <p class="text-[10px] md:text-xs text-gray-500 tracking-widest uppercase relative z-10">Profile Picture</p>
+                </div>
+
+                <!-- Floating Skill Logos -->
+                <div class="absolute -top-4 right-0 sm:-top-6 sm:right-4 md:-top-4 md:right-4 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-netcard border border-gray-800 rounded-full flex items-center justify-center shadow-xl z-30 animate-float" style="animation-delay: 0s;">
+                    <i class="fas fa-file-excel text-[#217346] text-2xl md:text-3xl" title="Excel"></i>
+                </div>
+                <div class="absolute -bottom-2 left-2 sm:-bottom-4 sm:left-6 md:-bottom-2 md:left-6 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-netcard border border-gray-800 rounded-full flex items-center justify-center shadow-xl z-30 animate-float" style="animation-delay: -2s;">
+                    <i class="fas fa-chart-bar text-[#F2C811] text-2xl md:text-3xl" title="Power BI"></i>
+                </div>
+                <div class="absolute top-[35%] -right-6 sm:top-[40%] sm:-right-8 md:top-[40%] md:-right-8 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-netcard border border-gray-800 rounded-full flex items-center justify-center shadow-xl z-30 animate-float" style="animation-delay: -4s;">
+                    <i class="fas fa-database text-[#008BB9] text-xl md:text-2xl" title="SQL"></i>
+                </div>
+
+                <!-- Netflix Style Match Badges (Scaled for Mobile) -->
+                <div class="absolute top-4 -left-2 sm:top-10 sm:-left-4 md:top-16 md:-left-12 bg-netcard border border-gray-800 rounded p-2 md:p-3 shadow-2xl flex items-center gap-2 md:gap-3 scale-90 sm:scale-100 z-20">
+                    <div class="text-green-500 font-bold text-lg md:text-xl leading-none">200+</div>
+                    <div class="text-[10px] md:text-xs text-gray-400 uppercase font-semibold leading-tight">
+                        <span class="en-text">New<br/>Accounts</span>
+                        <span class="th-text">ลูกค้า<br/>ใหม่</span>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-4 -right-2 sm:bottom-10 sm:-right-4 md:bottom-16 md:-right-8 bg-netcard border border-gray-800 rounded p-2 md:p-3 shadow-2xl flex items-center gap-2 md:gap-3 scale-90 sm:scale-100 z-20">
+                    <div class="text-green-500 font-bold text-lg md:text-xl leading-none">+36%</div>
+                    <div class="text-[10px] md:text-xs text-gray-400 uppercase font-semibold leading-tight">
+                        <span class="en-text">Net<br/>Profit</span>
+                        <span class="th-text">กำไร<br/>สุทธิ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Journey -->
+    <section id="journey" class="py-16 md:py-24 border-t border-gray-800 relative scroll-mt-12">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-heading text-white mb-8 md:mb-10 border-l-4 border-netred pl-4">
+                <span class="en-text">Career Journey</span>
+                <span class="th-text">ประวัติการทำงาน</span>
+            </h2>
+
+            <div class="space-y-3 md:space-y-4">
+                
+                <!-- 1. CPF -->
+                <div class="bg-netcard rounded-md border border-gray-800 overflow-hidden">
+                    <button class="w-full text-left px-4 py-4 md:px-6 md:py-5 flex items-center justify-between focus:outline-none hover:bg-netcardhover transition-colors" onclick="toggleAccordion('cpf', this)">
+                        <div class="flex items-center gap-3 md:gap-4">
+                            <div class="text-netred text-xl md:text-2xl w-6 md:w-8 text-center shrink-0"><i class="fas fa-building"></i></div>
+                            <div>
+                                <h3 class="text-base md:text-lg font-bold text-white leading-tight">
+                                    <span class="en-text">Management Trainee</span>
+                                    <span class="th-text">ผู้บริหารฝึกหัด</span>
+                                </h3>
+                                <p class="text-netred font-medium text-xs md:text-sm mt-0.5">CPF <span class="text-gray-500 hidden sm:inline">| Jun 2025 - Dec 2025</span></p>
+                                <p class="text-gray-500 text-[10px] sm:hidden mt-0.5">Jun 2025 - Dec 2025</p>
+                            </div>
+                        </div>
+                        <div class="text-gray-500 transition-transform duration-300 transform accordion-icon"><i class="fas fa-chevron-down"></i></div>
+                    </button>
+                    <div id="cpf" class="accordion-content open">
+                        <div class="accordion-inner bg-[#111] border-t border-gray-800">
+                            <div class="p-4 md:p-6 md:pl-20 space-y-5 md:space-y-6">
+                                <div>
+                                    <h4 class="text-white font-bold mb-2 text-sm md:text-base">
+                                        <span class="en-text">1. CPF x Makro (Chai Nat) - Fresh Product</span>
+                                        <span class="th-text">1. CPF x Makro (ชัยนาท) - สินค้าอาหารสด</span>
+                                    </h4>
+                                    <ul class="space-y-2 text-xs md:text-sm text-gray-400">
+                                        <li class="flex items-start gap-2"><i class="fas fa-play text-netred text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
+                                            <span class="en-text"><strong>B2B Acquisition:</strong> Executed strategies resulting in 200 new accounts.</span>
+                                            <span class="th-text"><strong>หาลูกค้า B2B:</strong> ดำเนินกลยุทธ์จนสามารถขยายฐานลูกค้าใหม่ได้กว่า 200 บัญชี</span>
+                                        </li>
+                                        <li class="flex items-start gap-2"><i class="fas fa-play text-netred text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
+                                            <span class="en-text"><strong>Pricing:</strong> Conducted commercial analysis for pricing & promotions.</span>
+                                            <span class="th-text"><strong>กลยุทธ์ราคา:</strong> วิเคราะห์ข้อมูลเชิงพาณิชย์เพื่อสนับสนุนการตัดสินใจเรื่องราคาและโปรโมชั่น</span>
+                                        </li>
+                                        <li class="flex items-start gap-2"><i class="fas fa-play text-netred text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
+                                            <span class="en-text"><strong>Operations:</strong> Managed stock and inventory optimization.</span>
+                                            <span class="th-text"><strong>ปฏิบัติการ:</strong> บริหารจัดการสต็อกและปรับปรุงการจัดเก็บสินค้าเพื่อลดความสูญเสีย</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-bold mb-2 text-sm md:text-base">
+                                        <span class="en-text">2. CPF x Makro (Northeast) - Processed Product</span>
+                                        <span class="th-text">2. CPF x Makro (ภาคอีสาน) - สินค้าแปรรูป</span>
+                                    </h4>
+                                    <ul class="space-y-2 text-xs md:text-sm text-gray-400">
+                                        <li class="flex items-start gap-2"><i class="fas fa-play text-netred text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
+                                            <span class="en-text"><strong>Sales Flow:</strong> Streamlined operator workflows for efficiency.</span>
+                                            <span class="th-text"><strong>กระบวนการทำงาน:</strong> ปรับปรุงขั้นตอนการทำงานของพนักงานขายให้มีประสิทธิภาพมากขึ้น</span>
+                                        </li>
+                                        <li class="flex items-start gap-2"><i class="fas fa-play text-netred text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
+                                            <span class="en-text"><strong>Profit Growth:</strong> Achieved a <strong>36% net profit increase</strong> in 3 months.</span>
+                                            <span class="th-text"><strong>การเติบโต:</strong> ปรับโครงสร้างราคาจนบรรลุเป้าหมาย <strong>กำไรสุทธิเพิ่มขึ้น 36%</strong> ภายใน 3 เดือน</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Chula -->
+                <div class="bg-netcard rounded-md border border-gray-800 overflow-hidden">
+                    <button class="w-full text-left px-4 py-4 md:px-6 md:py-5 flex items-center justify-between focus:outline-none hover:bg-netcardhover transition-colors" onclick="toggleAccordion('chula', this)">
+                        <div class="flex items-center gap-3 md:gap-4">
+                            <div class="text-pink-600 text-xl md:text-2xl w-6 md:w-8 text-center shrink-0"><i class="fas fa-university"></i></div>
+                            <div>
+                                <h3 class="text-base md:text-lg font-bold text-white leading-tight">
+                                    <span class="en-text">Bachelor of Engineering</span>
+                                    <span class="th-text">ปริญญาตรี วิศวกรรมศาสตร์</span>
+                                </h3>
+                                <p class="text-pink-500 font-medium text-xs md:text-sm mt-0.5">
+                                    <span class="en-text">Chulalongkorn Uni</span>
+                                    <span class="th-text">จุฬาลงกรณ์มหาวิทยาลัย</span>
+                                    <span class="text-gray-500 hidden sm:inline">| Aug 2021 - Jun 2025</span>
+                                </p>
+                                <p class="text-gray-500 text-[10px] sm:hidden mt-0.5">Aug 2021 - Jun 2025</p>
+                            </div>
+                        </div>
+                        <div class="text-gray-500 transition-transform duration-300 transform accordion-icon"><i class="fas fa-chevron-down"></i></div>
+                    </button>
+                    <div id="chula" class="accordion-content">
+                        <div class="accordion-inner bg-[#111] border-t border-gray-800">
+                            <div class="p-4 md:p-6 md:pl-20 text-xs md:text-sm text-gray-400 space-y-4">
+                                <div>
+                                    <p class="text-white font-bold mb-1"><i class="fas fa-flag text-pink-500 mr-2"></i>
+                                        <span class="en-text">Activities Director / Project Manager</span>
+                                        <span class="th-text">ประธานฝ่ายกิจกรรม / ผู้จัดการโครงการ</span>
+                                    </p>
+                                    <p>
+                                        <span class="en-text">Led Academic Club activities, organized 4 CSR camps. Renovated Wat Khao Chong Lab School and reforested wildlife sanctuary.</span>
+                                        <span class="th-text">ผู้นำจัดกิจกรรมชมรมวิชาการ และค่ายอาสาพัฒนา 4 แห่ง (ปรับปรุงโรงเรียนวัดเขาช่อง, ปลูกป่า ณ เขตรักษาพันธุ์สัตว์ป่าแม่น้ำชี ฯลฯ)</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. J Knowledge -->
+                <div class="bg-netcard rounded-md border border-gray-800 overflow-hidden">
+                    <button class="w-full text-left px-4 py-4 md:px-6 md:py-5 flex items-center justify-between focus:outline-none hover:bg-netcardhover transition-colors" onclick="toggleAccordion('jtutor', this)">
+                        <div class="flex items-center gap-3 md:gap-4">
+                            <div class="text-blue-500 text-xl md:text-2xl w-6 md:w-8 text-center shrink-0"><i class="fas fa-chalkboard-teacher"></i></div>
+                            <div>
+                                <h3 class="text-base md:text-lg font-bold text-white leading-tight">
+                                    <span class="en-text">Lecturer (Part-time)</span>
+                                    <span class="th-text">วิทยากร (พาร์ทไทม์)</span>
+                                </h3>
+                                <p class="text-blue-500 font-medium text-xs md:text-sm mt-0.5">J Knowledge Tutor <span class="text-gray-500 hidden sm:inline">| Oct 2023</span></p>
+                                <p class="text-gray-500 text-[10px] sm:hidden mt-0.5">Oct 2023</p>
+                            </div>
+                        </div>
+                        <div class="text-gray-500 transition-transform duration-300 transform accordion-icon"><i class="fas fa-chevron-down"></i></div>
+                    </button>
+                    <div id="jtutor" class="accordion-content">
+                        <div class="accordion-inner bg-[#111] border-t border-gray-800">
+                            <div class="p-4 md:p-6 md:pl-20 text-xs md:text-sm text-gray-400">
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2"><i class="fas fa-play text-blue-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
+                                        <span class="en-text">Delivered lectures to Civil Engineering students.</span>
+                                        <span class="th-text">บรรยายให้ความรู้แก่นักศึกษาปริญญาตรี ภาควิชาวิศวกรรมโยธา</span>
+                                    </li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-play text-blue-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
+                                        <span class="en-text">Conducted SAP2000 workshops for truss bridge design.</span>
+                                        <span class="th-text">จัดเวิร์คชอปสอนการใช้โปรแกรม SAP2000 เบื้องต้นในการออกแบบโครงสร้าง</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Thai Beverage -->
+                <div class="bg-netcard rounded-md border border-gray-800 overflow-hidden">
+                    <button class="w-full text-left px-4 py-4 md:px-6 md:py-5 flex items-center justify-between focus:outline-none hover:bg-netcardhover transition-colors" onclick="toggleAccordion('thaibev', this)">
+                        <div class="flex items-center gap-3 md:gap-4">
+                            <div class="text-orange-500 text-xl md:text-2xl w-6 md:w-8 text-center shrink-0"><i class="fas fa-drafting-compass"></i></div>
+                            <div>
+                                <h3 class="text-base md:text-lg font-bold text-white leading-tight">
+                                    <span class="en-text">Intern Engineer</span>
+                                    <span class="th-text">วิศวกร (ฝึกงาน)</span>
+                                </h3>
+                                <p class="text-orange-500 font-medium text-xs md:text-sm mt-0.5">Thai Beverage <span class="text-gray-500 hidden sm:inline">| Jun - Aug 2024</span></p>
+                                <p class="text-gray-500 text-[10px] sm:hidden mt-0.5">Jun - Aug 2024</p>
+                            </div>
+                        </div>
+                        <div class="text-gray-500 transition-transform duration-300 transform accordion-icon"><i class="fas fa-chevron-down"></i></div>
+                    </button>
+                    <div id="thaibev" class="accordion-content">
+                        <div class="accordion-inner bg-[#111] border-t border-gray-800">
+                            <div class="p-4 md:p-6 md:pl-20 text-xs md:text-sm text-gray-400">
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2"><i class="fas fa-play text-orange-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
+                                        <span class="en-text"><strong>Project Management:</strong> Managed cost estimation and design for a packaging building extension (1.5M THB budget).</span>
+                                        <span class="th-text"><strong>การบริหารโครงการ:</strong> ประเมินราคาและออกแบบส่วนต่อขยายอาคารบรรจุภัณฑ์ (งบประมาณ 1.5 ล้านบาท)</span>
+                                    </li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-play text-orange-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
+                                        <span class="en-text">Oversaw entire project lifecycle: site assessment, structural design, BOQ preparation, and securing final approval.</span>
+                                        <span class="th-text">ดูแลโครงการตั้งแต่ประเมินพื้นที่ ออกแบบโครงสร้าง จัดทำ BOQ จนถึงการขออนุมัติเริ่มการก่อสร้าง</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Betagro -->
+                <div class="bg-netcard rounded-md border border-gray-800 overflow-hidden">
+                    <button class="w-full text-left px-4 py-4 md:px-6 md:py-5 flex items-center justify-between focus:outline-none hover:bg-netcardhover transition-colors" onclick="toggleAccordion('betagro', this)">
+                        <div class="flex items-center gap-3 md:gap-4">
+                            <div class="text-yellow-500 text-xl md:text-2xl w-6 md:w-8 text-center shrink-0"><i class="fas fa-hard-hat"></i></div>
+                            <div>
+                                <h3 class="text-base md:text-lg font-bold text-white leading-tight">
+                                    <span class="en-text">Intern Site Engineer</span>
+                                    <span class="th-text">วิศวกรภาคสนาม (ฝึกงาน)</span>
+                                </h3>
+                                <p class="text-yellow-500 font-medium text-xs md:text-sm mt-0.5">BETAGRO (Laos) <span class="text-gray-500 hidden sm:inline">| May - Aug 2023</span></p>
+                                <p class="text-gray-500 text-[10px] sm:hidden mt-0.5">May - Aug 2023</p>
+                            </div>
+                        </div>
+                        <div class="text-gray-500 transition-transform duration-300 transform accordion-icon"><i class="fas fa-chevron-down"></i></div>
+                    </button>
+                    <div id="betagro" class="accordion-content">
+                        <div class="accordion-inner bg-[#111] border-t border-gray-800">
+                            <div class="p-4 md:p-6 md:pl-20 text-xs md:text-sm text-gray-400">
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2"><i class="fas fa-play text-yellow-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
+                                        <span class="en-text"><strong>Project Delivery:</strong> Oversaw wastewater system construction, ensuring 100% completion in 1.5 months (2.4M THB value).</span>
+                                        <span class="th-text"><strong>การส่งมอบโครงการ:</strong> ควบคุมงานระบบน้ำเสียมูลค่า 2.4 ล้านบาท ให้เสร็จสมบูรณ์ 100% ภายใน 1.5 เดือน</span>
+                                    </li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-play text-yellow-500 text-[8px] md:text-[10px] mt-1 shrink-0"></i> 
+                                        <span class="en-text"><strong>Budget Management:</strong> Supervised daily operations, labor costs, and payroll for a >20-person team within a 300,000 THB monthly budget.</span>
+                                        <span class="th-text"><strong>การจัดการงบประมาณ:</strong> ควบคุมการปฏิบัติงานและบริหารจัดการต้นทุนค่าแรงของพนักงานกว่า 20 คน ให้อยู่ในงบ 300,000 บาท/เดือน</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Awards -->
+                <div class="bg-netcard rounded-md border border-gray-800 overflow-hidden">
+                    <button class="w-full text-left px-4 py-4 md:px-6 md:py-5 flex items-center justify-between focus:outline-none hover:bg-netcardhover transition-colors" onclick="toggleAccordion('awards', this)">
+                        <div class="flex items-center gap-3 md:gap-4">
+                            <div class="text-yellow-400 text-xl md:text-2xl w-6 md:w-8 text-center shrink-0"><i class="fas fa-trophy"></i></div>
+                            <div>
+                                <h3 class="text-base md:text-lg font-bold text-white leading-tight">
+                                    <span class="en-text">Innovation Awards</span>
+                                    <span class="th-text">รางวัลนวัตกรรมดีเด่น</span>
+                                </h3>
+                                <p class="text-yellow-400 font-medium text-xs md:text-sm mt-0.5">SIIF & YSC <span class="text-gray-500 hidden sm:inline">| Project Highlights</span></p>
+                                <p class="text-gray-500 text-[10px] sm:hidden mt-0.5">Project Highlights</p>
+                            </div>
+                        </div>
+                        <div class="text-gray-500 transition-transform duration-300 transform accordion-icon"><i class="fas fa-chevron-down"></i></div>
+                    </button>
+                    <div id="awards" class="accordion-content">
+                        <div class="accordion-inner bg-[#111] border-t border-gray-800">
+                            <div class="p-4 md:p-6 md:pl-20 space-y-4">
+                                <div>
+                                    <h4 class="text-yellow-500 font-bold mb-1 text-sm md:text-base"><i class="fas fa-medal mr-2"></i>Gold Prize (SIIF)</h4>
+                                    <p class="text-xs md:text-sm text-gray-400">
+                                        <span class="en-text">Seoul International Invention Fair: Recognized for innovation in machine design.</span>
+                                        <span class="th-text">งานประกวดนวัตกรรมนานาชาติ ณ กรุงโซล: ได้รับรางวัลจากผลงานการออกแบบเครื่องจักร</span>
+                                    </p>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-300 font-bold mb-1 text-sm md:text-base"><i class="fas fa-award mr-2"></i>1st Runner-up (YSC)</h4>
+                                    <p class="text-xs md:text-sm text-gray-400">
+                                        <span class="en-text">Young Scientist Competition: Developed wood replacement material from bagasse.</span>
+                                        <span class="th-text">พัฒนาวัสดุทดแทนไม้จากชานอ้อย ยางพารา และซิลิกา เพื่อเพิ่มประสิทธิภาพการใช้งาน</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section (Netflix Poster Grid Style) -->
+    <section id="skills" class="py-16 md:py-24 border-t border-gray-800 bg-[#0a0a0a] scroll-mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-heading text-white mb-2 border-l-4 border-netred pl-4">
+                <span class="en-text">Skills & Tools</span>
+                <span class="th-text">ทักษะและเครื่องมือ</span>
+            </h2>
+            <p class="text-gray-400 mb-8 md:mb-10 pl-5 text-sm">
+                <span class="en-text">Tap on any tool to view details.</span>
+                <span class="th-text">แตะที่โลโก้เพื่อดูรายละเอียดการใช้งาน</span>
+            </p>
+
+            <!-- Logo Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
+                
+                <button onclick="openSkillModal('excel')" class="skill-card aspect-[3/4] bg-netcard border border-gray-800 rounded-md flex flex-col items-center justify-center gap-3 md:gap-4 hover:bg-black group">
+                    <i class="fas fa-file-excel text-4xl md:text-5xl text-[#217346] group-hover:scale-110 transition-transform"></i>
+                    <span class="font-bold text-gray-300 tracking-wider text-xs md:text-sm">Excel</span>
+                </button>
+
+                <button onclick="openSkillModal('ai')" class="skill-card aspect-[3/4] bg-netcard border border-gray-800 rounded-md flex flex-col items-center justify-center gap-3 md:gap-4 hover:bg-black group">
+                    <i class="fas fa-robot text-4xl md:text-5xl text-purple-500 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-bold text-gray-300 tracking-wider text-xs md:text-sm">AI Tools</span>
+                </button>
+
+                <button onclick="openSkillModal('python')" class="skill-card aspect-[3/4] bg-netcard border border-gray-800 rounded-md flex flex-col items-center justify-center gap-3 md:gap-4 hover:bg-black group">
+                    <i class="fab fa-python text-4xl md:text-5xl text-[#FFD43B] group-hover:scale-110 transition-transform"></i>
+                    <span class="font-bold text-gray-300 tracking-wider text-xs md:text-sm">Python</span>
+                </button>
+
+                <button onclick="openSkillModal('sql')" class="skill-card aspect-[3/4] bg-netcard border border-gray-800 rounded-md flex flex-col items-center justify-center gap-3 md:gap-4 hover:bg-black group">
+                    <i class="fas fa-database text-4xl md:text-5xl text-[#008BB9] group-hover:scale-110 transition-transform"></i>
+                    <span class="font-bold text-gray-300 tracking-wider text-xs md:text-sm">SQL</span>
+                </button>
+
+                <button onclick="openSkillModal('powerbi')" class="skill-card aspect-[3/4] bg-netcard border border-gray-800 rounded-md flex flex-col items-center justify-center gap-3 md:gap-4 hover:bg-black group">
+                    <i class="fas fa-chart-bar text-4xl md:text-5xl text-[#F2C811] group-hover:scale-110 transition-transform"></i>
+                    <span class="font-bold text-gray-300 tracking-wider text-xs md:text-sm">Power BI</span>
+                </button>
+
+                <button onclick="openSkillModal('gas')" class="skill-card aspect-[3/4] bg-netcard border border-gray-800 rounded-md flex flex-col items-center justify-center gap-3 md:gap-4 hover:bg-black group">
+                    <i class="fas fa-file-code text-4xl md:text-5xl text-[#4285F4] group-hover:scale-110 transition-transform"></i>
+                    <span class="font-bold text-gray-300 tracking-wider text-xs text-center px-1 md:text-sm md:px-2">Apps Script</span>
+                </button>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Netflix Style Skill Modal -->
+    <!-- Changed to snap to bottom on mobile (Bottom Sheet) -->
+    <div id="skill-modal" class="fixed inset-x-0 bottom-0 top-auto sm:inset-0 z-[100] hidden flex-col sm:items-center sm:justify-center">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-black/80 backdrop-blur-sm sm:absolute" onclick="closeSkillModal()"></div>
+        
+        <!-- Modal Content Box (Bottom Sheet on Mobile, Centered on Desktop) -->
+        <div class="relative w-full sm:max-w-3xl bg-netcard border border-gray-800 rounded-t-2xl sm:rounded-lg shadow-[0_-10px_40px_rgba(0,0,0,0.5)] sm:shadow-2xl overflow-hidden animate-modal-pop mt-auto sm:mt-0 max-h-[85vh] sm:max-h-none overflow-y-auto">
+            
+            <!-- Mobile Grabber Bar -->
+            <div class="w-full flex justify-center py-3 sm:hidden" onclick="closeSkillModal()">
+                <div class="w-12 h-1.5 bg-gray-600 rounded-full"></div>
+            </div>
+
+            <!-- Close Btn (Desktop) -->
+            <button onclick="closeSkillModal()" class="hidden sm:flex absolute top-4 right-4 z-10 w-10 h-10 bg-[#181818]/80 rounded-full items-center justify-center text-white hover:bg-white hover:text-black transition-colors">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+
+            <!-- Top Banner Visual -->
+            <div class="h-32 md:h-56 w-full bg-gradient-to-b from-gray-800 to-netcard flex items-center justify-center relative">
+                <div class="absolute inset-0 bg-black/40"></div>
+                <i id="modal-icon" class="fas fa-code text-6xl md:text-7xl relative z-10 drop-shadow-2xl"></i>
+            </div>
+
+            <!-- Content Area -->
+            <div class="px-5 md:px-10 pb-8 sm:pb-10 pt-2 sm:pt-4">
+                <h3 id="modal-title" class="text-3xl md:text-5xl font-heading text-white mb-2">Skill Title</h3>
+                
+                <div class="flex items-center gap-3 mb-5 md:mb-6">
+                    <span class="text-green-500 font-bold text-xs md:text-sm">99% Match</span>
+                    <span class="border border-gray-600 px-1 text-[10px] md:text-xs text-gray-400">PRO</span>
+                </div>
+                
+                <p class="text-white font-bold text-sm md:text-base mb-3">
+                    <span class="en-text">How I use it:</span>
+                    <span class="th-text">ลักษณะการนำไปใช้งาน:</span>
+                </p>
+                
+                <div id="modal-desc" class="space-y-3">
+                    <!-- Dynamic Content Injected via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 md:py-24 border-t border-gray-800 bg-netbg relative scroll-mt-12">
+        <div class="max-w-2xl mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-heading text-white mb-4 md:mb-6">
+                <span class="en-text">Let's Create Impact</span>
+                <span class="th-text">มาร่วมสร้างผลงานด้วยกัน</span>
+            </h2>
+            <p class="text-gray-400 text-sm md:text-base mb-8 md:mb-10 px-2">
+                <span class="en-text">I am currently open to new opportunities. Let's connect!</span>
+                <span class="th-text">ปัจจุบันผมเปิดรับโอกาสใหม่ๆ ในการทำงาน สามารถติดต่อพูดคุยกันได้เลยครับ</span>
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 mb-10 md:mb-12">
+                <a href="mailto:catawut.forjobs2002@gmail.com" class="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 bg-netcard border border-gray-800 hover:border-netred rounded flex items-center justify-center gap-3 text-white transition-colors text-sm md:text-base">
+                    <i class="fas fa-envelope text-netred text-lg md:text-xl"></i> catawut.forjobs2002@gmail.com
+                </a>
+                <a href="tel:0809979844" class="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 bg-netcard border border-gray-800 hover:border-netred rounded flex items-center justify-center gap-3 text-white transition-colors text-sm md:text-base">
+                    <i class="fas fa-phone text-netred text-lg md:text-xl"></i> 080-997-9844
+                </a>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex justify-center gap-6 pb-6 md:pb-0">
+                <a href="https://www.linkedin.com/in/catawut-phormrin-8ab40a315" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-white transition-colors text-3xl">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script>
+        // --- 1. Language Toggle Logic ---
+        const btnDesktop = document.getElementById('lang-toggle');
+        const btnMobile = document.getElementById('lang-toggle-mobile');
+        
+        function toggleLanguage() {
+            const body = document.body;
+            if (body.classList.contains('lang-en')) {
+                body.classList.remove('lang-en');
+                body.classList.add('lang-th');
+            } else {
+                body.classList.remove('lang-th');
+                body.classList.add('lang-en');
+            }
+        }
+        
+        btnDesktop.addEventListener('click', toggleLanguage);
+        btnMobile.addEventListener('click', toggleLanguage);
+
+        // --- 2. Accordion Logic ---
+        function toggleAccordion(id, btnElement) {
+            const content = document.getElementById(id);
+            const icon = btnElement.querySelector('.accordion-icon');
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                icon.style.transform = "rotate(0deg)";
+            } else {
+                content.classList.add('open');
+                icon.style.transform = "rotate(180deg)";
+            }
+        }
+
+        // --- 3. Scroll Spy for Mobile Bottom Navigation ---
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".bottom-nav-link");
+
+        window.addEventListener("scroll", () => {
+            let current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                // Add a little offset for mobile scroll
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (link.dataset.section === current) {
+                    link.classList.add("active");
+                }
+            });
+        });
+
+        // --- 4. Netflix Skill Modal Logic ---
+        const skillsData = {
+            'excel': {
+                title: 'Advanced Excel',
+                iconClass: 'fas fa-file-excel text-[#217346]',
+                en: [
+                    "Performed data cleaning, reporting, and analysis to support sales planning and pricing decisions.",
+                    "Improved customer analysis by organizing data into clear and actionable segments."
+                ],
+                th: [
+                    "จัดการทำความสะอาดข้อมูล จัดทำรายงาน และวิเคราะห์ข้อมูลเพื่อสนับสนุนการวางแผนการขายและการตั้งราคา",
+                    "เพิ่มประสิทธิภาพในการวิเคราะห์ลูกค้า โดยการจัดหมวดหมู่ข้อมูลให้ชัดเจนและนำไปใช้ได้จริง"
+                ]
+            },
+            'ai': {
+                title: 'AI Tools',
+                iconClass: 'fas fa-robot text-purple-500',
+                en: [
+                    "Leveraged AI tools to increase productivity and improve the speed of analysis.",
+                    "Used AI to generate customer insights and support more effective prospect targeting."
+                ],
+                th: [
+                    "ใช้เครื่องมือ AI เพื่อเพิ่มประสิทธิภาพการทำงานและเพิ่มความรวดเร็วในการวิเคราะห์ข้อมูล",
+                    "ประยุกต์ใช้ AI เพื่อสร้าง Customer Insights และสนับสนุนการเจาะกลุ่มเป้าหมายให้แม่นยำยิ่งขึ้น"
+                ]
+            },
+            'python': {
+                title: 'Basic Python',
+                iconClass: 'fab fa-python text-[#FFD43B]',
+                en: [
+                    "Developed basic Python skills through academic training and practice.",
+                    "Applied Python to simple data tasks and basic workflow automation."
+                ],
+                th: [
+                    "พัฒนาทักษะการเขียนโปรแกรม Python เบื้องต้นผ่านการเรียนในมหาวิทยาลัยและการฝึกฝน",
+                    "ใช้ Python ในการจัดการงานข้อมูลพื้นฐานและสร้างระบบ Automation แบบง่ายเพื่อลดขั้นตอนการทำงาน"
+                ]
+            },
+            'sql': {
+                title: 'SQL',
+                iconClass: 'fas fa-database text-[#008BB9]',
+                en: [
+                    "Queried and managed large-scale customer data for business analysis and sales planning.",
+                    "Used SQL to support segmentation and extract useful insights from complex datasets."
+                ],
+                th: [
+                    "ดึงข้อมูล (Query) และจัดการฐานข้อมูลลูกค้าขนาดใหญ่ เพื่อใช้ในการวิเคราะห์ธุรกิจและวางแผนการขาย",
+                    "ใช้ SQL เพื่อสนับสนุนการจัดกลุ่มเป้าหมาย (Segmentation) และสกัดข้อมูลเชิงลึกจากชุดข้อมูลที่ซับซ้อน"
+                ]
+            },
+            'powerbi': {
+                title: 'Power BI',
+                iconClass: 'fas fa-chart-bar text-[#F2C811]',
+                en: [
+                    "Built dashboards to visualize business performance and key trends.",
+                    "Supported decision-making by turning data into easy-to-understand reports."
+                ],
+                th: [
+                    "สร้าง Dashboards เพื่อแสดงผลการดำเนินงานทางธุรกิจและแนวโน้มที่สำคัญ",
+                    "สนับสนุนการตัดสินใจของผู้บริหารโดยการเปลี่ยนข้อมูลดิบให้เป็นรายงานที่เข้าใจง่าย"
+                ]
+            },
+            'gas': {
+                title: 'Google Apps Script',
+                iconClass: 'fas fa-file-code text-[#4285F4]',
+                en: [
+                    "Created a simple web-based dashboard to improve communication between field staff and management.",
+                    "Enhanced daily operations by making reporting and data access easier on mobile devices."
+                ],
+                th: [
+                    "สร้าง Web-based Dashboard แบบง่าย เพื่อพัฒนาการสื่อสารระหว่างพนักงานลงพื้นที่และทีมบริหาร",
+                    "เพิ่มความคล่องตัวในการปฏิบัติงานประจำวัน โดยช่วยให้การรายงานและการเข้าถึงข้อมูลผ่านมือถือทำได้ง่ายขึ้น"
+                ]
+            }
+        };
+
+        const modal = document.getElementById('skill-modal');
+        const modalIcon = document.getElementById('modal-icon');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+
+        function openSkillModal(skillKey) {
+            const data = skillsData[skillKey];
+            const isEnglish = document.body.classList.contains('lang-en');
+            
+            // Set Icon & Title
+            modalIcon.className = `${data.iconClass} text-5xl sm:text-7xl relative z-10 drop-shadow-2xl`;
+            modalTitle.innerText = data.title;
+
+            // Generate Content based on current language
+            const listItems = data.en.map((enText, index) => {
+                const thText = data.th[index];
+                return `
+                    <div class="flex items-start gap-2 sm:gap-3 bg-black/30 p-3 sm:p-4 rounded-md border border-gray-800">
+                        <i class="fas fa-play text-netred text-[10px] sm:text-xs mt-1 shrink-0"></i>
+                        <div>
+                            <p class="en-text text-gray-300 leading-relaxed text-xs sm:text-sm md:text-base">${enText}</p>
+                            <p class="th-text text-gray-300 leading-relaxed text-xs sm:text-sm md:text-base">${thText}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            modalDesc.innerHTML = listItems;
+
+            // Show Modal
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // Disable background scroll
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSkillModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            // Re-enable background scroll
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>
