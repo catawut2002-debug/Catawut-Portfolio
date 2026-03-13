@@ -112,6 +112,167 @@
         .delay-200 { animation-delay: 200ms; }
         .delay-300 { animation-delay: 300ms; }
         .opacity-0 { opacity: 0; }
+
+        /* ===== ENHANCED MOTION SYSTEM ===== */
+
+        /* Cursor Glow */
+        #cursor-glow {
+            position: fixed;
+            width: 520px;
+            height: 520px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(229,9,20,0.07) 0%, transparent 65%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            mix-blend-mode: screen;
+            transition: left 0.07s linear, top 0.07s linear;
+        }
+
+        /* Hero Grid Background */
+        .hero-grid-bg {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(229,9,20,0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(229,9,20,0.045) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridScroll 22s linear infinite;
+            mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%);
+        }
+        @keyframes gridScroll {
+            to { background-position: 60px 60px; }
+        }
+
+        /* Skills Section BG Grid */
+        .skills-bg {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(transparent, transparent 59px, rgba(229,9,20,0.025) 59px, rgba(229,9,20,0.025) 60px),
+                        repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(229,9,20,0.025) 59px, rgba(229,9,20,0.025) 60px);
+            pointer-events: none;
+        }
+
+        /* Glitch Effect on Logo */
+        .glitch-nav { position: relative; display: inline-block; }
+        .glitch-nav::before,
+        .glitch-nav::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            font-family: inherit; font-size: inherit; letter-spacing: inherit;
+            color: inherit; opacity: 0; pointer-events: none;
+        }
+        .glitch-nav:hover::before {
+            color: #00eeff; opacity: 0.8;
+            animation: glitch-a 0.3s steps(2) infinite;
+        }
+        .glitch-nav:hover::after {
+            color: #ff0077; opacity: 0.7;
+            animation: glitch-b 0.3s steps(2) infinite;
+        }
+        @keyframes glitch-a {
+            0%   { clip-path: inset(0 0 90% 0);  transform: translateX(-5px); }
+            33%  { clip-path: inset(35% 0 45% 0); transform: translateX(5px); }
+            66%  { clip-path: inset(70% 0 15% 0); transform: translateX(-4px); }
+            100% { clip-path: inset(15% 0 70% 0); transform: translateX(4px); }
+        }
+        @keyframes glitch-b {
+            0%   { clip-path: inset(75% 0 10% 0); transform: translateX(5px); }
+            33%  { clip-path: inset(10% 0 70% 0); transform: translateX(-5px); }
+            66%  { clip-path: inset(50% 0 30% 0); transform: translateX(4px); }
+            100% { clip-path: inset(5% 0 85% 0);  transform: translateX(-4px); }
+        }
+
+        /* Stat Card Shimmer */
+        @keyframes shimmerScan {
+            from { transform: translateX(-120%) skewX(-20deg); }
+            to   { transform: translateX(320%) skewX(-20deg); }
+        }
+        .stat-shine { position: relative; overflow: hidden; }
+        .stat-shine::after {
+            content: '';
+            position: absolute; top: 0; left: 0;
+            width: 30%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
+            animation: shimmerScan 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        /* Skill Card Position-Aware Glow */
+        .skill-card { position: relative; }
+        .skill-card::after {
+            content: '';
+            position: absolute; inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(229,9,20,0.14) 0%, transparent 55%);
+            opacity: 0; transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .skill-card:hover::after { opacity: 1; }
+
+        /* Profile Ring Pulse */
+        @keyframes ringGlow {
+            0%, 100% { box-shadow: 0 0 30px rgba(229,9,20,0.5), 0 0 60px rgba(229,9,20,0.2); }
+            50%       { box-shadow: 0 0 55px rgba(229,9,20,0.75), 0 0 110px rgba(229,9,20,0.3); }
+        }
+        .ring-pulse { animation: ringGlow 3.5s ease-in-out infinite; }
+
+        /* Float Badge hover pop */
+        .float-badge { cursor: default; }
+        .float-badge:hover { transform: scale(1.08) translateY(-3px) !important; box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important; transition: transform 0.2s ease, box-shadow 0.2s ease !important; }
+
+        /* Typewriter Cursor */
+        @keyframes blinkCursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .tw-cursor { display: inline; color: #E50914; animation: blinkCursor 0.9s step-end infinite; }
+
+        /* Nav Link Underline Sweep */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute; bottom: -3px; left: 0;
+            width: 0; height: 1px;
+            background: #E50914;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        /* Leadership Card Hover Lift */
+        #leadership .grid > div {
+            transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        #leadership .grid > div:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 48px rgba(229,9,20,0.13);
+        }
+
+        /* Contact CTA Pulse */
+        @keyframes ctaPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(229,9,20,0); }
+            50%       { box-shadow: 0 0 22px 5px rgba(229,9,20,0.18); }
+        }
+        .contact-cta { animation: ctaPulse 3s ease-in-out infinite; }
+
+        /* Accordion open animation */
+        @keyframes slideInContent {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .accordion-content.open .accordion-inner > div {
+            animation: slideInContent 0.35s ease-out forwards;
+        }
+
+        /* Horizontal scan line for section borders */
+        @keyframes scanRed {
+            0%   { transform: scaleX(0); transform-origin: left; opacity: 1; }
+            48%  { transform: scaleX(1); transform-origin: left; opacity: 1; }
+            52%  { transform: scaleX(1); transform-origin: right; opacity: 1; }
+            100% { transform: scaleX(0); transform-origin: right; opacity: 0; }
+        }
     </style>
 </head>
 <body class="lang-en antialiased selection:bg-netred selection:text-white">
@@ -124,16 +285,19 @@
                     <span class="font-heading text-4xl md:text-5xl tracking-wider text-netred drop-shadow-md">CATAWUT</span>
                 </div>
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#about" class="text-gray-300 hover:text-white font-medium transition-colors text-sm">
+                    <a href="#about" class="nav-link text-gray-300 hover:text-white font-medium transition-colors text-sm">
                         <span class="en-text">About</span><span class="th-text">เกี่ยวกับ</span>
                     </a>
-                    <a href="#journey" class="text-gray-300 hover:text-white font-medium transition-colors text-sm">
+                    <a href="#journey" class="nav-link text-gray-300 hover:text-white font-medium transition-colors text-sm">
                         <span class="en-text">Journey</span><span class="th-text">ประวัติการทำงาน</span>
                     </a>
-                    <a href="#skills" class="text-gray-300 hover:text-white font-medium transition-colors text-sm">
+                    <a href="#skills" class="nav-link text-gray-300 hover:text-white font-medium transition-colors text-sm">
                         <span class="en-text">Skills</span><span class="th-text">ทักษะ</span>
                     </a>
-                    <a href="#contact" class="text-gray-300 hover:text-white font-medium transition-colors text-sm mr-4">
+                    <a href="projects.html" class="nav-link text-gray-300 hover:text-white font-medium transition-colors text-sm">
+                        <span class="en-text">Projects</span><span class="th-text">ผลงาน</span>
+                    </a>
+                    <a href="#contact" class="nav-link text-gray-300 hover:text-white font-medium transition-colors text-sm mr-4">
                         <span class="en-text">Contact</span><span class="th-text">ติดต่อ</span>
                     </a>
                     <button id="lang-toggle" class="border border-gray-600 rounded px-3 py-1 text-xs text-white hover:border-white transition-colors flex items-center gap-2">
@@ -1279,6 +1443,146 @@
             modal.classList.remove('flex');
             document.body.style.overflow = '';
         }
+
+        // ===== ENHANCED MOTION SYSTEM =====
+        (function() {
+
+            // 1. Cursor Glow
+            const glow = document.createElement('div');
+            glow.id = 'cursor-glow';
+            document.body.appendChild(glow);
+            document.addEventListener('mousemove', e => {
+                glow.style.left = e.clientX + 'px';
+                glow.style.top  = e.clientY + 'px';
+            });
+
+            // 2. Hero animated grid background
+            const heroInner = document.querySelector('#about .absolute.inset-0.z-0');
+            if (heroInner) {
+                const grid = document.createElement('div');
+                grid.className = 'hero-grid-bg';
+                heroInner.insertBefore(grid, heroInner.firstChild);
+            }
+
+            // 3. Skills section background grid
+            const skillsSec = document.getElementById('skills');
+            if (skillsSec) {
+                const bg = document.createElement('div');
+                bg.className = 'skills-bg';
+                skillsSec.insertBefore(bg, skillsSec.firstChild);
+            }
+
+            // 4. Glitch effect on CATAWUT logo
+            const logo = document.querySelector('nav .font-heading.text-netred');
+            if (logo) {
+                logo.classList.add('glitch-nav');
+                logo.setAttribute('data-text', 'CATAWUT');
+            }
+
+            // 5. Typewriter cursor on h1 headline
+            const h1 = document.querySelector('h1');
+            if (h1) {
+                const cursor = document.createElement('span');
+                cursor.className = 'tw-cursor';
+                cursor.textContent = '_';
+                h1.appendChild(cursor);
+                setTimeout(() => { cursor.remove(); }, 3800);
+            }
+
+            // 6. Profile ring pulse
+            const profileRing = document.querySelector('#about .rounded-full.border-4.border-netred');
+            if (profileRing) profileRing.classList.add('ring-pulse');
+
+            // 7. Floating badges hover pop
+            document.querySelectorAll('#about .absolute.bg-netcard.border.border-gray-800.rounded').forEach(el => {
+                el.classList.add('float-badge');
+            });
+
+            // 8. Stat card shimmer
+            document.querySelectorAll('.bg-black\\/40.border.border-gray-800.rounded-md').forEach(el => {
+                el.classList.add('stat-shine');
+            });
+
+            // 9. Contact CTA pulse
+            const firstCta = document.querySelector('#contact a');
+            if (firstCta) firstCta.classList.add('contact-cta');
+
+            // 10. Skill card mouse position glow
+            document.querySelectorAll('.skill-card').forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const r = card.getBoundingClientRect();
+                    card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+                    card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+                });
+            });
+
+            // 11. Scroll Reveal with IntersectionObserver
+            function revealSetup(el, delay, fromX, fromY, scale) {
+                el.style.opacity = '0';
+                const transforms = [];
+                if (fromY) transforms.push(`translateY(${fromY}px)`);
+                if (fromX) transforms.push(`translateX(${fromX}px)`);
+                if (scale) transforms.push(`scale(${scale})`);
+                el.style.transform = transforms.join(' ');
+                el.style.willChange = 'opacity, transform';
+                return { el, delay };
+            }
+
+            function revealElement(el, delay) {
+                const dur = 750;
+                el.style.transition = `opacity ${dur}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform ${dur}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`;
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0) translateX(0) scale(1)';
+                setTimeout(() => {
+                    el.style.transition = '';
+                    el.style.transform = '';
+                    el.style.opacity   = '';
+                    el.style.willChange = 'auto';
+                }, delay + dur + 50);
+            }
+
+            const targets = [];
+
+            // Section h2 headings (slide from left)
+            document.querySelectorAll('#journey h2, #skills h2, #leadership h2, #contact h2').forEach(el => {
+                targets.push(revealSetup(el, 0, -30, 0, null));
+            });
+            document.querySelectorAll('#journey p.text-gray-400, #skills p.text-gray-400, #leadership p.text-gray-400').forEach(el => {
+                targets.push(revealSetup(el, 80, 0, 20, null));
+            });
+
+            // Journey accordion cards (stagger from bottom)
+            document.querySelectorAll('#journey .space-y-3 > div, #journey .space-y-4 > div').forEach((el, i) => {
+                targets.push(revealSetup(el, i * 80, 0, 40, null));
+            });
+
+            // Skill cards (stagger + slight scale)
+            document.querySelectorAll('.skill-card').forEach((el, i) => {
+                targets.push(revealSetup(el, i * 65, 0, 30, 0.94));
+            });
+
+            // Leadership cards (stagger)
+            document.querySelectorAll('#leadership .grid > div').forEach((el, i) => {
+                targets.push(revealSetup(el, i * 85, 0, 40, null));
+            });
+
+            // Contact section content
+            document.querySelectorAll('#contact .max-w-2xl > *').forEach((el, i) => {
+                targets.push(revealSetup(el, i * 110, 0, 30, null));
+            });
+
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    const found = targets.find(t => t.el === entry.target);
+                    revealElement(entry.target, found ? found.delay : 0);
+                    obs.unobserve(entry.target);
+                });
+            }, { threshold: 0.07, rootMargin: '0px 0px -25px 0px' });
+
+            targets.forEach(({ el }) => obs.observe(el));
+
+        })();
     </script>
 </body>
 </html>
