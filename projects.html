@@ -6,26 +6,19 @@
     <title>Projects – Catawut Phormrin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: { extend: {
                 colors:{ netbg:'#141414', netcard:'#181818', netred:'#E50914' },
-                fontFamily:{ sans:['Freesia', 'Inter', 'sans-serif'], heading:['Bebas Neue','sans-serif'] }
+                fontFamily:{ 
+                    sans:['Inter', 'Noto Sans Thai', 'sans-serif'], 
+                    heading:['Bebas Neue', 'Noto Sans Thai', 'sans-serif'] 
+                }
             }}
         }
     </script>
     <style>
-        /* ── นำเข้าฟอนต์ Freesia (ต้องมีไฟล์ Freesia.ttf หรือ .woff2 ในโฟลเดอร์เดียวกับเว็บ) ── */
-        @font-face {
-            font-family: 'Freesia';
-            src: url('Freesia.woff2') format('woff2'),
-                 url('Freesia.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-
         *{box-sizing:border-box}
         body{background:#141414;color:#E5E5E5;overflow-x:hidden;padding-bottom:0}
         @media(max-width:767px){body{padding-bottom:70px}}

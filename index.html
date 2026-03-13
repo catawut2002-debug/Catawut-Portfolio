@@ -334,6 +334,11 @@
             <span class="text-[10px] font-medium en-text">Skills</span>
             <span class="text-[10px] font-medium th-text">ทักษะ</span>
         </a>
+        <a href="projects.html" class="bottom-nav-link flex flex-col items-center text-gray-500 transition-colors w-16 pt-1">
+            <i class="fas fa-folder-open text-xl mb-1 transition-transform"></i>
+            <span class="text-[10px] font-medium en-text">Projects</span>
+            <span class="text-[10px] font-medium th-text">ผลงาน</span>
+        </a>
         <a href="#contact" class="bottom-nav-link flex flex-col items-center text-gray-500 transition-colors w-16 pt-1" data-section="contact">
             <i class="fas fa-user-circle text-xl mb-1 transition-transform"></i>
             <span class="text-[10px] font-medium en-text">Contact</span>
@@ -1174,16 +1179,31 @@
         const btnDesktop = document.getElementById('lang-toggle');
         const btnMobile = document.getElementById('lang-toggle-mobile');
 
-        function toggleLanguage() {
+        // Load saved language from localStorage (shared key with projects.html)
+        let currentLang = localStorage.getItem('siteLang') || 'en';
+
+        function applyLang(lang) {
             const body = document.body;
-            if (body.classList.contains('lang-en')) {
-                body.classList.remove('lang-en');
-                body.classList.add('lang-th');
-            } else {
-                body.classList.remove('lang-th');
-                body.classList.add('lang-en');
-            }
+            body.classList.remove('lang-en', 'lang-th');
+            body.classList.add('lang-' + lang);
         }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'th' : 'en';
+            localStorage.setItem('siteLang', currentLang);
+            applyLang(currentLang);
+        }
+
+        // Apply saved language on load
+        applyLang(currentLang);
+
+        // Sync language if changed in another tab
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'siteLang' && e.newValue) {
+                currentLang = e.newValue;
+                applyLang(currentLang);
+            }
+        });
 
         btnDesktop.addEventListener('click', toggleLanguage);
         btnMobile.addEventListener('click', toggleLanguage);
